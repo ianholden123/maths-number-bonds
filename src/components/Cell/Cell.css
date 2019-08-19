@@ -1,6 +1,6 @@
 .Cell {
-    height: calc(100% / 12);
-    width: calc(100% / 12);
+    height: calc(100% / 11);
+    width: calc(100% / 11);
 }
 
 .Cell.header {
