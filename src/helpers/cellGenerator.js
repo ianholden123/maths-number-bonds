@@ -17,8 +17,8 @@ cellGenerator.generateCellsFromPhases = (phases) => {
       phase.bonds.forEach(bond => {
         if (!bond || !bond.hasOwnProperty('x') || !bond.hasOwnProperty('y')) return null
 
-        cells[bond.y][bond.x] = cellGenerator._createCell(bond.x, bond.y, phase)
-        cells[bond.x][bond.y] = cellGenerator._createCell(bond.y, bond.x, phase)
+        cells[bond.y][bond.x] = cellGenerator.createCell(bond.x, bond.y, phase)
+        cells[bond.x][bond.y] = cellGenerator.createCell(bond.y, bond.x, phase)
       })
     })
 
@@ -52,17 +52,20 @@ cellGenerator.getAxisRange = (phases, axis) => {
 
 /**
  * Returns the object that should populate a cell component
+ * @param value1 X value
+ * @param value2 Y value
+ * @param phaseObj An object containing data about the phase
  */
-cellGenerator._createCell = (value1, value2, phase) => {
+cellGenerator.createCell = (value1 = null, value2 = null, phaseObj = {}) => {
   return {
     x : value1,
     y : value2,
     phase: {
-      id: phase.id || null,
-      name: phase.name || '',
-      description: phase.description || '',
-      number: phase.number || 0,
-      colour: phase.colour || 'white'
+      id: phaseObj.hasOwnProperty('id') ? phaseObj.id : null,
+      name: phaseObj.hasOwnProperty('name') ? phaseObj.name : '',
+      description: phaseObj.hasOwnProperty('description') ? phaseObj.description : '',
+      number: phaseObj.hasOwnProperty('number') ? phaseObj.number : 0,
+      colour: phaseObj.hasOwnProperty('colour') ? phaseObj.colour : ''
     }
   }
 }

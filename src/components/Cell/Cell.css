@@ -1,9 +1,9 @@
 .Cell {
-    height: calc(100% / 11);
-    width: calc(100% / 11);
+    height: calc(100% / 12);
+    width: calc(100% / 12);
 }
 
 .Cell.header {
-    background-color: grey;
+    background-color: black;
     color: white;
 }
