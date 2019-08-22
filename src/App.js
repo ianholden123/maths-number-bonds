@@ -1,13 +1,19 @@
 import React, {Component} from 'react';
-import Grid from './components/Grid/Grid'
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
+import Home from './pages/Home/Home'
+import SelectPhases from './pages/SelectPhases/SelectPhases'
 
 class App extends Component {
 
   render() {
     return (
       <div className="App">
-          <Grid></Grid>
+          <Router>
+            <Route path="/" exact component={Home} />
+            <Route path="/practice-zone/" render={() => <SelectPhases title='Practice Zone' pageType='practice' />} />
+            <Route path="/assessment/" render={() => <SelectPhases title='Assessment' pageType='assessment' />} />
+          </Router>
       </div>
     );
   }
