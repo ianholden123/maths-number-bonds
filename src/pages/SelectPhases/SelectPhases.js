@@ -24,7 +24,7 @@ class SelectPhases extends Component {
         <h1>{this.props.title}</h1>
         {this.getPhaseButtons()}
         <Router>
-          <button><Link to="/">Start</Link></button>
+          <button><Link to="/task/">Start</Link></button>
         </Router>
       </div>
     );
