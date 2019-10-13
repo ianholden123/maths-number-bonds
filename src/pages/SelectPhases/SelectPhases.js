@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link
+} from "react-router-dom";
 import './SelectPhases.css';
 import phases from '../../config/phases'
 
 class SelectPhases extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { selectedPhases: [] }
+  }
+
   getPhaseButtons() {
     let buttons = [];
-    phases.forEach((phase) => {
+    phases.forEach(phase => {
       if (!phase.id || !phase.name || !phase.description) return;
       buttons.push(
-        <button key={phase.id}>
+        <button key={phase.id} onClick={() => {this.selectPhase(phase.id)}}>
           <strong>{phase.name}</strong>
           <p>{phase.description}</p>
         </button>
@@ -17,14 +25,28 @@ class SelectPhases extends Component {
     })
     return buttons;
   }
+
+  selectPhase(id) {
+    const selectedIndex = this.state.selectedPhases.indexOf(id)
+    let newArray = this.state.selectedPhases
+
+    if (selectedIndex > -1) {
+      newArray.splice(selectedIndex, 1)
+    } else {
+      newArray.push(id)
+    }
+
+    this.setState({selectedPhases: newArray})
+  }
   
   render() {
+    const queryParamPhases = encodeURIComponent(this.state.selectedPhases.join(','))
     return (
       <div className={this.props.pageType}>
         <h1>{this.props.title}</h1>
         {this.getPhaseButtons()}
         <Router>
-          <button><Link to="/task/">Start</Link></button>
+          <button><Link to={`/task?phases=${queryParamPhases}`}>Start</Link></button>
         </Router>
       </div>
     );
