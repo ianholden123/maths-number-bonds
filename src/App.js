@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import './App.css';
 import Home from './pages/Home/Home'
 import SelectPhases from './pages/SelectPhases/SelectPhases'
@@ -11,10 +11,20 @@ class App extends Component {
     return (
       <div className="App">
           <Router>
-            <Route path="/" exact component={Home} />
-            <Route path="/practice-zone/" render={() => <SelectPhases title='Practice Zone' pageType='practice' />} />
-            <Route path="/assessment/" render={() => <SelectPhases title='Assessment' pageType='assessment' />} />
-            <Route path="/task/" component={Task} />
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/practice-zone">
+                <SelectPhases title='Practice Zone' pageType='practice' />
+              </Route>
+              <Route path="/assessment">
+                <SelectPhases title='Assessment' pageType='assessment' />
+              </Route>
+              <Route path="/task">
+                <Task />
+              </Route>
+            </Switch>
           </Router>
       </div>
     );

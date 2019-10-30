@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import './SelectPhases.css';
 import phases from '../../config/phases'
 
@@ -45,9 +42,9 @@ class SelectPhases extends Component {
       <div className={this.props.pageType}>
         <h1>{this.props.title}</h1>
         {this.getPhaseButtons()}
-        <Router>
-          <button><Link to={`/task?phases=${queryParamPhases}`}>Start</Link></button>
-        </Router>
+        <Link to={`/task?phases=${queryParamPhases}`}>
+          <button>Start</button>
+        </Link>
       </div>
     );
   }
