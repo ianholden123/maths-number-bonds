@@ -12,7 +12,7 @@ class SelectPhases extends Component {
   getPhaseButtons() {
     let buttons = [];
     phases.forEach(phase => {
-      if (!phase.id || !phase.name || !phase.description) return;
+      if ((!phase.id && phase.id < 0) || !phase.name || !phase.description) return;
       buttons.push(
         <button key={phase.id} onClick={() => {this.selectPhase(phase.id)}}>
           <strong>{phase.name}</strong>

@@ -21,9 +21,10 @@ class App extends Component {
               <Route path="/assessment">
                 <SelectPhases title='Assessment' pageType='assessment' />
               </Route>
-              <Route path="/task">
-                <Task />
-              </Route>
+              <Route
+                path="/task"
+                render={props => <Task location={props.location}/>}
+              />
             </Switch>
           </Router>
       </div>
