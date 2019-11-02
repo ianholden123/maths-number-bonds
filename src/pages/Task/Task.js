@@ -9,9 +9,11 @@ class Task extends Component {
   constructor(props) {
     super(props)
 
-    const chosenPhases = this._getPhasesFromUrl()
-    const questions = this._getQuestionsFromPhases(chosenPhases)
-    this.state = { phases, questions }
+    const initials = null
+    const chosenPhaseIds = this._getPhasesFromUrl()
+    const chosenPhases = this._getPhasesFromIds(chosenPhaseIds)
+    const transformedPhases = this._transformPhases(chosenPhases)
+    this.state = { initials, chosenPhases, transformedPhases }
   }
 
   _getPhasesFromUrl() {
@@ -22,10 +24,22 @@ class Task extends Component {
     return results.toString().split(',')
   }
 
-  _getQuestionsFromPhases(chosenPhases) {
-    chosenPhases = chosenPhases.map(phase => Number(phase))
-    // Do something clever here
-    return chosenPhases
+  _getPhasesFromIds(chosenPhaseIds) {
+    return chosenPhaseIds.map(chosenPhaseId => {
+      return phases.find(phase => { return Number(chosenPhaseId) === phase.id })
+    })
+  }
+
+  _transformPhases(chosenPhases) {
+    return chosenPhases.map(chosenPhase => {
+      chosenPhase.bonds.forEach(bond => { chosenPhase.bonds.push({x: bond.y, y: bond.x}) })
+      chosenPhase.bonds = chosenPhase.bonds.map(bond => { return {
+        ...bond,
+        answeredCorrect: null,
+        timeToAnswer: null
+      }})
+      return chosenPhase
+    });
   }
 
   render() {
