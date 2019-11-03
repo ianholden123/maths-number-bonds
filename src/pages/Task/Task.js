@@ -1,53 +1,61 @@
 import React, { Component } from 'react';
 import './Task.css';
-import phases from '../../config/phases'
 import Initials from '../../components/Initials/Initials'
-import Numpad from '../../components/Numpad/Numpad'
 import Problem from '../../components/Problem/Problem'
+import urlHelper from '../../helpers/url'
+import phasesHelper from '../../helpers/phases'
 
 class Task extends Component {
   constructor(props) {
     super(props)
+    this.setInitials = this.setInitials.bind(this)
+    this.startTask = this.startTask.bind(this)
 
-    const initials = null
-    const chosenPhaseIds = this._getPhasesFromUrl()
-    const chosenPhases = this._getPhasesFromIds(chosenPhaseIds)
-    const transformedPhases = this._transformPhases(chosenPhases)
-    this.state = { initials, chosenPhases, transformedPhases }
+    // Set initials
+    const initialsFromUrl = urlHelper.getParamValuesFromUrl('initials', this.props.location.search)
+    const initials = (initialsFromUrl && initialsFromUrl[0]) || null
+
+    // Setup questions for chosen phase(s)
+    const chosenPhaseIds = urlHelper.getParamValuesFromUrl('phases', this.props.location.search)
+    const chosenPhases = phasesHelper.getPhasesFromIds(chosenPhaseIds)
+    const transformedPhases = phasesHelper.transformPhases(chosenPhases)
+    const questions = phasesHelper.createQuestionsFromPhases(transformedPhases)
+    const shuffledQuestions = phasesHelper.shuffleArray(questions)
+
+    this.state = {
+      initials,
+      transformedPhases,
+      questions: shuffledQuestions,
+      taskStarted: false,
+      currentQuestionIndex: 0
+    }
   }
 
-  _getPhasesFromUrl() {
-    const urlParams = this.props.location.search
-    const regex = new RegExp('[\\?&]phases=([^&#]*)')
-    let results = regex.exec(urlParams)
-    if (results) results = decodeURIComponent(results[1].replace(/\+/g, ' '))
-    return results.toString().split(',')
+  setInitials(initials) {
+    this.setState({ initials })
   }
 
-  _getPhasesFromIds(chosenPhaseIds) {
-    return chosenPhaseIds.map(chosenPhaseId => {
-      return phases.find(phase => { return Number(chosenPhaseId) === phase.id })
-    })
-  }
-
-  _transformPhases(chosenPhases) {
-    return chosenPhases.map(chosenPhase => {
-      chosenPhase.bonds.forEach(bond => { chosenPhase.bonds.push({x: bond.y, y: bond.x}) })
-      chosenPhase.bonds = chosenPhase.bonds.map(bond => { return {
-        ...bond,
-        answeredCorrect: null,
-        timeToAnswer: null
-      }})
-      return chosenPhase
-    });
+  startTask() {
+    this.setState({ taskStarted: true })
   }
 
   render() {
     return (
       <div className="task">
-        <Initials></Initials>
-        <Problem></Problem>
-        <Numpad></Numpad>
+        {!this.state.initials && (
+          <Initials setInitials={this.setInitials} />
+        )}
+        {this.state.initials && (
+          <>
+            <Problem
+              number1={this.state.questions[this.state.currentQuestionIndex].x}
+              number2={this.state.questions[this.state.currentQuestionIndex].y}
+            />
+            {!this.state.taskStarted && (
+              <button onClick={this.startTask}>Begin</button>
+            )}
+          </>
+        )}
       </div>
     );
   }

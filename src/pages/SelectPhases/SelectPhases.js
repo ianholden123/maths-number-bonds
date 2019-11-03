@@ -42,9 +42,15 @@ class SelectPhases extends Component {
       <div className={this.props.pageType}>
         <h1>{this.props.title}</h1>
         {this.getPhaseButtons()}
-        <Link to={`/task?phases=${queryParamPhases}`}>
-          <button>Start</button>
-        </Link>
+        {
+          this.state.selectedPhases.length > 0 ?
+            <Link to={`/task?phases=${queryParamPhases}`}>
+              <button>Start {this.props.taskType}</button>
+            </Link>
+          :
+            <button disabled>Start {this.props.taskType}</button>
+        }
+        
       </div>
     );
   }

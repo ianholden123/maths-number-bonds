@@ -16,10 +16,10 @@ class App extends Component {
                 <Home />
               </Route>
               <Route path="/practice-zone">
-                <SelectPhases title='Practice Zone' pageType='practice' />
+                <SelectPhases title='Practice Zone' taskType='practice' />
               </Route>
               <Route path="/assessment">
-                <SelectPhases title='Assessment' pageType='assessment' />
+                <SelectPhases title='Assessment' taskType='assessment' />
               </Route>
               <Route
                 path="/task"

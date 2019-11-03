@@ -101,7 +101,7 @@ const phases = [
     {
         id: 3,
         name: 'Phase 4',
-        description: 'Adding 2',
+        description: 'Bonds to 10',
         number: 4,
         colour: 'yellow',
         bonds: [
