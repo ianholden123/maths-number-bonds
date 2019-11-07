@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import Cell from '../Cell/Cell'
-import phases from '../../config/phases'
-import cellGenerator from '../../helpers/cellGenerator'
+import phases from '../../../config/phases'
+import cellGenerator from '../../../helpers/cellGenerator'
 import './Grid.css';
 
 class Grid extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { questions: props.questions }
+  }
 
   render() {
     const cells = cellGenerator.generateCellsFromPhases(phases)

@@ -53,6 +53,7 @@ phasesHelper.createQuestionsFromPhases = transformedPhases => {
       questions.push({
         ...bond,
         answeredCorrectly: null,
+        answerGiven: null,
         timeToAnswer: null,
         phase: {
           id: transformedPhase.id,

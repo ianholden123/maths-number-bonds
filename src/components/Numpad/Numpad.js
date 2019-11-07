@@ -14,9 +14,15 @@ class Numpad extends Component {
         <button id="numpad_7" onClick={() => this.props.handleNumpadButtonPress('7')}>7</button>
         <button id="numpad_8" onClick={() => this.props.handleNumpadButtonPress('8')}>8</button>
         <button id="numpad_9" onClick={() => this.props.handleNumpadButtonPress('9')}>9</button>
-        <button id="numpad_back" onClick={() => this.props.handleNumpadButtonPress('B')}>Back</button>
+        <button id="numpad_back"
+          onClick={() => this.props.handleNumpadButtonPress('B')}
+          disabled={!this.props.currentAnswer}
+        >Back</button>
         <button id="numpad_0" onClick={() => this.props.handleNumpadButtonPress('0')}>0</button>
-        <button id="numpad_enter" onClick={() => this.props.handleNumpadButtonPress('E')}>Enter</button>
+        <button id="numpad_enter" 
+          onClick={() => this.props.handleNumpadButtonPress('E')}
+          disabled={!this.props.currentAnswer}
+        >Enter</button>
       </div>
     );
   }

@@ -7,10 +7,26 @@ class Problem extends Component {
     super(props)
 
     this.handleNumpadButtonPress = this.handleNumpadButtonPress.bind(this)
+    this.submitAnswer = this.submitAnswer.bind(this)
+    this.resetState = this.resetState.bind(this)
 
     this.state = {
-      currentAnswer: ''
+      currentAnswer: '',
+      problemStartDateTime: new Date(),
+      problemEndDateTime: null
     }
+  }
+
+  componentDidMount(){
+    this.nameInput.focus();
+  }
+
+  resetState() {
+    this.setState({
+      currentAnswer: '',
+      problemStartDateTime: new Date(),
+      problemEndDateTime: null
+    })
   }
 
   handleNumpadButtonPress(value) {
@@ -41,7 +57,12 @@ class Problem extends Component {
   }
 
   submitAnswer(answer) {
-    console.log('THIS IS ANSWER', answer)
+    if (!answer) return
+    const problemEndDateTime = new Date()
+    const timeDifference = problemEndDateTime.getTime() - this.state.problemStartDateTime.getTime()
+    this.setState({ problemEndDateTime })
+    this.props.answerQuestion(answer, timeDifference)
+    this.resetState()
   }
 
   handleKeyDown(event) {
@@ -56,7 +77,8 @@ class Problem extends Component {
           <span id="operator"> + </span>
           <span id="number2">{this.props.number2}</span>
           <span id="equals"> = </span>
-          <input 
+          <input
+            ref={(input) => { this.nameInput = input; }}
             type="number"
             name="answer"
             id="answer"
@@ -67,6 +89,7 @@ class Problem extends Component {
         </div>
         <Numpad 
           handleNumpadButtonPress={this.handleNumpadButtonPress}
+          currentAnswer={this.state.currentAnswer}
         />
       </>
     );

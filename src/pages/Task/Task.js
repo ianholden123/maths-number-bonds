@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import './Task.css';
 import Initials from '../../components/Initials/Initials'
 import Problem from '../../components/Problem/Problem'
+import Grid from '../../components/Results/Grid/Grid'
 import urlHelper from '../../helpers/url'
 import phasesHelper from '../../helpers/phases'
 
@@ -10,6 +12,7 @@ class Task extends Component {
     super(props)
     this.setInitials = this.setInitials.bind(this)
     this.startTask = this.startTask.bind(this)
+    this.answerQuestion = this.answerQuestion.bind(this)
 
     // Set initials
     const initialsFromUrl = urlHelper.getParamValuesFromUrl('initials', this.props.location.search)
@@ -27,6 +30,7 @@ class Task extends Component {
       transformedPhases,
       questions: shuffledQuestions,
       taskStarted: false,
+      taskFinished: false,
       currentQuestionIndex: 0
     }
   }
@@ -39,22 +43,45 @@ class Task extends Component {
     this.setState({ taskStarted: true })
   }
 
+  answerQuestion(answer, timeToAnswerMs) {
+    if (this.state.taskFinished) return
+    const { x: firstNumber, y: secondNumber } = this.state.questions[this.state.currentQuestionIndex]
+    const isCorrect = (firstNumber + secondNumber) === Number(answer)
+    const taskFinished = this.state.currentQuestionIndex === this.state.questions.length - 1
+    let updatedQuestions = this.state.questions
+    updatedQuestions[this.state.currentQuestionIndex].answeredCorrectly = isCorrect
+    updatedQuestions[this.state.currentQuestionIndex].timeToAnswer = timeToAnswerMs
+    updatedQuestions[this.state.currentQuestionIndex].answerGiven = answer
+    this.setState({
+      questions: updatedQuestions,
+      currentQuestionIndex: !taskFinished ? this.state.currentQuestionIndex + 1 : this.state.currentQuestionIndex,
+      taskFinished
+    })
+  }
+
   render() {
     return (
       <div className="task">
         {!this.state.initials && (
           <Initials setInitials={this.setInitials} />
         )}
-        {this.state.initials && (
+        {!this.state.taskStarted && this.state.initials && (
           <>
-            <Problem
-              number1={this.state.questions[this.state.currentQuestionIndex].x}
-              number2={this.state.questions[this.state.currentQuestionIndex].y}
-            />
-            {!this.state.taskStarted && (
-              <button onClick={this.startTask}>Begin</button>
-            )}
+            <p>Here is some shpiel.</p>
+            <button onClick={this.startTask}>Begin</button>
           </>
+        )}
+        {this.state.initials && this.state.taskStarted && !this.state.taskFinished && (
+          <Problem
+            number1={this.state.questions[this.state.currentQuestionIndex].x}
+            number2={this.state.questions[this.state.currentQuestionIndex].y}
+            answerQuestion={this.answerQuestion}
+          />
+        )}
+        {this.state.taskFinished && (
+          <Grid
+            questions={this.state.questions}
+          />
         )}
       </div>
     );
