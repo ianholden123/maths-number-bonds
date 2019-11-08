@@ -7,10 +7,15 @@ class Initials extends Component {
 
     this.handleStartClick = this.handleStartClick.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
   }
 
   handleInputChange(event) {
     this.setState({ initialsValue: event.target.value});
+  }
+
+  handleKeyDown(event) {
+    if (event.key === 'Enter') this.props.setInitials(this.state.initialsValue)
   }
   
   handleStartClick() {
@@ -21,7 +26,13 @@ class Initials extends Component {
     return (
       <div className="initials">
         <label htmlFor="initials">Initials:</label>
-        <input type="text" name="initials" id="initials" onChange={this.handleInputChange} />
+        <input 
+          type="text"
+          name="initials"
+          id="initials"
+          onChange={this.handleInputChange}
+          onKeyDown={this.handleKeyDown}
+        />
         <button onClick={this.handleStartClick}>Set Initials</button>
       </div>
     );

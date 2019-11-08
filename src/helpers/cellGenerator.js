@@ -1,6 +1,6 @@
 let cellGenerator = {}
 
-cellGenerator.generateCellsFromPhases = (phases) => {
+cellGenerator.generateCellsFromPhases = (phases, answeredQuestions) => {
     if (!phases || typeof phases !== 'object' || phases.length === 0) return null
 
     let cells = []
@@ -17,8 +17,8 @@ cellGenerator.generateCellsFromPhases = (phases) => {
       phase.bonds.forEach(bond => {
         if (!bond || !bond.hasOwnProperty('x') || !bond.hasOwnProperty('y')) return null
 
-        cells[bond.y][bond.x] = cellGenerator.createCell(bond.x, bond.y, phase)
-        cells[bond.x][bond.y] = cellGenerator.createCell(bond.y, bond.x, phase)
+        cells[bond.y][bond.x] = cellGenerator.createCell(bond.x, bond.y, phase, answeredQuestions)
+        cells[bond.x][bond.y] = cellGenerator.createCell(bond.y, bond.x, phase, answeredQuestions)
       })
     })
 
@@ -56,7 +56,19 @@ cellGenerator.getAxisRange = (phases, axis) => {
  * @param value2 Y value
  * @param phaseObj An object containing data about the phase
  */
-cellGenerator.createCell = (value1 = null, value2 = null, phaseObj = {}) => {
+cellGenerator.createCell = (value1 = null, value2 = null, phaseObj = {}, answeredQuestions = null) => {
+  let answerGiven, answeredCorrectly, timeToAnswer
+  
+  if (answeredQuestions) {
+    answeredQuestions.forEach(answeredQuestion => {
+      if ((answeredQuestion.x === value1) && (answeredQuestion.y === value2)) {
+        answerGiven = answeredQuestion.answerGiven
+        answeredCorrectly = answeredQuestion.answeredCorrectly
+        timeToAnswer = answeredQuestion.timeToAnswer
+      }
+    })
+  }
+
   return {
     x : value1,
     y : value2,
@@ -65,8 +77,11 @@ cellGenerator.createCell = (value1 = null, value2 = null, phaseObj = {}) => {
       name: phaseObj.hasOwnProperty('name') ? phaseObj.name : '',
       description: phaseObj.hasOwnProperty('description') ? phaseObj.description : '',
       number: phaseObj.hasOwnProperty('number') ? phaseObj.number : 0,
-      colour: phaseObj.hasOwnProperty('colour') ? phaseObj.colour : ''
-    }
+      colour: phaseObj.hasOwnProperty('colour') && answerGiven ? phaseObj.colour : ''
+    },
+    answerGiven: answerGiven || null,
+    answeredCorrectly: answeredCorrectly || null,
+    timeToAnswer: timeToAnswer || null
   }
 }
 

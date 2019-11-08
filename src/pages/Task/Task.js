@@ -18,6 +18,10 @@ class Task extends Component {
     const initialsFromUrl = urlHelper.getParamValuesFromUrl('initials', this.props.location.search)
     const initials = (initialsFromUrl && initialsFromUrl[0]) || null
 
+    // Set task type
+    const taskTypeFromUrl = urlHelper.getParamValuesFromUrl('taskType', this.props.location.search)
+    const taskType = (taskTypeFromUrl && taskTypeFromUrl[0]) || null
+
     // Setup questions for chosen phase(s)
     const chosenPhaseIds = urlHelper.getParamValuesFromUrl('phases', this.props.location.search)
     const chosenPhases = phasesHelper.getPhasesFromIds(chosenPhaseIds)
@@ -26,6 +30,7 @@ class Task extends Component {
     const shuffledQuestions = phasesHelper.shuffleArray(questions)
 
     this.state = {
+      taskType: taskType.charAt(0).toUpperCase() + taskType.slice(1),
       initials,
       transformedPhases,
       questions: shuffledQuestions,
@@ -62,6 +67,7 @@ class Task extends Component {
   render() {
     return (
       <div className="task">
+        <h1>{this.state.taskType}</h1>
         {!this.state.initials && (
           <Initials setInitials={this.setInitials} />
         )}

@@ -12,7 +12,7 @@ class Grid extends Component {
   }
 
   render() {
-    const cells = cellGenerator.generateCellsFromPhases(phases)
+    const cells = cellGenerator.generateCellsFromPhases(phases, this.props.questions)
     const emptyCellData = cellGenerator.createCell()
     const output = []
 
@@ -31,7 +31,7 @@ class Grid extends Component {
 
       for (let x = 0; x < cells[y].length; x++) {
         output.push(
-          <Cell key={`${y},${x}`} x={x} y={y} data={cells[y][x]}>
+          <Cell key={`${x},${y}`} x={x} y={y} data={cells[y][x]}>
             {`${y} + ${x}`}
           </Cell>
         )

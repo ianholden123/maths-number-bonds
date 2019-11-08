@@ -1,0 +1,44 @@
+:root {
+    /* Brand */
+    --primary-color: #548C2B;
+    --primary-color-light: #82D943;
+    --primary-color-dark: #395922;
+    --secondary-color: #F2B705;
+    --secondary-color-light: #F0F2B6;
+    --secondary-color-dark: #a17a03;
+
+    /* Typography */
+    --black-color: #000000;
+    --white-color: #FFFFFF;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    color: var(--black-color);
+    background-color: var(--secondary-color-light);
+    text-align: center;
+}
+
+.App {
+    margin: 20px;
+    border: 10px solid var(--primary-color-light);
+    border-radius: 20px;
+}
+
+button {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--black-color);
+    padding: 15px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+/* Utilities */
+.bg-primary { background-color: var(--primary-color); }
+.bg-primary-light { background-color: var(--primary-color-light); }
+.bg-primary-dark { background-color: var(--primary-color-dark); }
+.bg-secondary { background-color: var(--secondary-color); }
+.bg-secondary-light { background-color: var(--secondary-color-light); }
+.bg-secondary-dark { background-color: var(--secondary-color-dark); }

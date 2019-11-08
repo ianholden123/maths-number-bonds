@@ -39,12 +39,12 @@ class SelectPhases extends Component {
   render() {
     const queryParamPhases = encodeURIComponent(this.state.selectedPhases.join(','))
     return (
-      <div className={this.props.pageType}>
+      <div className={this.props.taskType}>
         <h1>{this.props.title}</h1>
         {this.getPhaseButtons()}
         {
           this.state.selectedPhases.length > 0 ?
-            <Link to={`/task?phases=${queryParamPhases}`}>
+            <Link to={`/task?phases=${queryParamPhases}&taskType=${this.props.taskType}`}>
               <button>Start {this.props.taskType}</button>
             </Link>
           :
