@@ -68,6 +68,7 @@ class Task extends Component {
     return (
       <div className="task">
         <h1>{this.state.taskType}</h1>
+        {this.state.initials ? <p className="initials">Initials: {this.state.initials}</p> : ''}
         {!this.state.initials && (
           <Initials setInitials={this.setInitials} />
         )}
@@ -85,9 +86,13 @@ class Task extends Component {
           />
         )}
         {this.state.taskFinished && (
-          <Grid
-            questions={this.state.questions}
-          />
+          <>
+            <Grid
+              questions={this.state.questions}
+            />
+            <button>Main Menu</button>
+            <button>Export to PDF</button>
+          </>
         )}
       </div>
     );

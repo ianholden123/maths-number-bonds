@@ -1,0 +1,10 @@
+.phaseButtons {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 700px;
+    margin: auto;
+}
+
+.phaseButtons button {
+    width: calc(33% - 40px);
+}

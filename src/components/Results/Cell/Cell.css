@@ -1,6 +1,13 @@
 .Cell {
     height: calc(100% / 12);
     width: calc(100% / 12);
+    display: flex;
+    justify-content: center;
+}
+
+.Cell span {
+    align-content: center;
+    display: grid;
 }
 
 .Cell.header {
