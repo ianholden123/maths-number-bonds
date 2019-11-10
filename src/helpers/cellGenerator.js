@@ -80,7 +80,7 @@ cellGenerator.createCell = (value1 = null, value2 = null, phaseObj = {}, answere
       colour: phaseObj.hasOwnProperty('colour') && answerGiven ? phaseObj.colour : ''
     },
     answerGiven: answerGiven || null,
-    answeredCorrectly: answeredCorrectly || null,
+    answeredCorrectly,
     timeToAnswer: timeToAnswer || null
   }
 }

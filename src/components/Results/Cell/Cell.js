@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './Cell.css';
 
 class Cell extends Component {
-
     getClassNames() {
         const {x, y} = this.props
         let classNames = ['Cell']
@@ -19,7 +18,11 @@ class Cell extends Component {
 
     render() {
         return (
-            <div className={this.getClassNames()} style={this.getStyles()}>
+            <div
+                className={this.getClassNames()}
+                style={this.getStyles()}
+                onClick={() => this.props.handleSelectedCell ? this.props.handleSelectedCell(this.props.data) : false}
+            >
                 {this.props.children}
             </div>
         );

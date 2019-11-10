@@ -72,10 +72,7 @@ class Task extends Component {
           <Initials setInitials={this.setInitials} />
         )}
         {!this.state.taskStarted && this.state.initials && (
-          <>
-            <p>Here is some shpiel.</p>
-            <button onClick={this.startTask}>Begin</button>
-          </>
+          <button onClick={this.startTask}>Begin {this.state.taskType}</button>
         )}
         {this.state.initials && this.state.taskStarted && !this.state.taskFinished && (
           <Problem

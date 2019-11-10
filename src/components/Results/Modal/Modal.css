@@ -1,0 +1,23 @@
+.Modal {
+    visibility: visible;
+    position: absolute;
+    background-color: var(--white-color);
+    padding: 20px;
+    border: 1px solid var(--black-color);
+    border-radius: 5px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.Modal.show {
+    visibility: visible;
+}
+
+.Modal button.closeModal {
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    line-height: 0.5;
+    padding-bottom: 15px;
+}

@@ -6,10 +6,9 @@
     --secondary-color: #F2B705;
     --secondary-color-light: #F0F2B6;
     --secondary-color-dark: #a17a03;
-
-    /* Typography */
     --black-color: #000000;
     --white-color: #FFFFFF;
+    --grey-color: #AAAAAA;
 }
 
 body {
@@ -45,9 +44,10 @@ button {
     margin: 20px;
     border-radius: 10px;
     font-size: 22px;
+    transition: 0.1s;
 }
 
-button.selected {
+button.selected, button:hover {
     background-color: var(--secondary-color-dark);
     color: var(--white-color);
 }

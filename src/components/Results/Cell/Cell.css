@@ -3,6 +3,9 @@
     width: calc(100% / 12);
     display: flex;
     justify-content: center;
+    border-right: 1px solid var(--black-color);
+    border-bottom: 1px solid var(--black-color);
+    box-sizing: border-box;
 }
 
 .Cell span {

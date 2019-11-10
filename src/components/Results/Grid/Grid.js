@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Cell from '../Cell/Cell'
+import Modal from '../Modal/Modal'
 import phases from '../../../config/phases'
 import cellGenerator from '../../../helpers/cellGenerator'
 import './Grid.css';
@@ -8,7 +9,22 @@ class Grid extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { questions: props.questions }
+    this.state = {
+      questions: props.questions,
+      selectedCellData: null,
+      showModal: false
+    }
+
+    this.handleSelectedCell = this.handleSelectedCell.bind(this)
+    this.handleCloseModal = this.handleCloseModal.bind(this)
+  }
+
+  handleSelectedCell(selectedCellData) {
+    this.setState({selectedCellData, showModal: true})
+  }
+
+  handleCloseModal() {
+    this.setState({selectedCellData: null, showModal: false})
   }
 
   render() {
@@ -35,7 +51,13 @@ class Grid extends Component {
 
       for (let x = 0; x < cells[y].length; x++) {
         output.push(
-          <Cell key={`${x},${y}`} x={x} y={y} data={cells[y][x]}>
+          <Cell
+            key={`${x},${y}`}
+            x={x}
+            y={y}
+            data={cells[x][y]}
+            handleSelectedCell={this.handleSelectedCell}
+          >
             <span>{`${y} + ${x}`}</span>
           </Cell>
         )
@@ -45,6 +67,9 @@ class Grid extends Component {
     return (
       <div className="Grid">
         {output}
+        {this.state.showModal && this.state.selectedCellData ? 
+          <Modal selectedCellData={this.state.selectedCellData} handleCloseModal={this.handleCloseModal}/> 
+        : false}
       </div>
     );
   }
