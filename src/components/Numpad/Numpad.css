@@ -1,0 +1,11 @@
+.numpad {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.numpad button {
+    width: calc(33% - 10px);
+    margin: 5px;
+}

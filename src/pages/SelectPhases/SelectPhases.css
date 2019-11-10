@@ -7,4 +7,9 @@
 
 .phaseButtons button {
     width: calc(33% - 40px);
+    font-size: 18px;
+}
+
+.phaseButtons button p {
+    margin: 5px;
 }

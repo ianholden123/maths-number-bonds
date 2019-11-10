@@ -9,7 +9,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="AppContainer">
+        <div className="App">
           <Router>
             <Switch>
               <Route exact path="/">
@@ -27,6 +28,7 @@ class App extends Component {
               />
             </Switch>
           </Router>
+        </div>
       </div>
     );
   }

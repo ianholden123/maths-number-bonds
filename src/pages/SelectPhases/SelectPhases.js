@@ -16,10 +16,10 @@ class SelectPhases extends Component {
     phases.forEach(phase => {
       if ((!phase.id && phase.id < 0) || !phase.name || !phase.description) return;
       buttons.push(
-        <button 
-          key={phase.id} 
+        <button
+          key={phase.id}
           onClick={() => {this.selectPhase(phase.id)}}
-          className={this.state.selectedPhases.includes(phase.id) ? 'selected' : ''}
+          className={this.state.selectedPhases.includes(phase.id) ? 'selected' : false}
         >
           <strong>{phase.name}</strong>
           <p>{phase.description}</p>
@@ -65,7 +65,7 @@ class SelectPhases extends Component {
           {this.getPhaseButtons()}
           <button 
             onClick={this.toggleAllPhases}
-            className={this.state.selectedPhases.length === phases.length ? 'selected' : ''}
+            className={this.state.selectedPhases.length === phases.length ? 'selected' : false}
           >
             { this.state.selectedPhases.length === phases.length ? 'Deselect all phases' : 'Select all phases'}
           </button>

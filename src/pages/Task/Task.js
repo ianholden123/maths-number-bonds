@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 import './Task.css';
 import Initials from '../../components/Initials/Initials'
 import Problem from '../../components/Problem/Problem'
