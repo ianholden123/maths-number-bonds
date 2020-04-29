@@ -1,0 +1,16 @@
+#keys {
+  text-align: left;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 20px;
+  display: flex;
+}
+
+.key ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.key ul li {
+  margin: 0 20px 5px 0;
+}

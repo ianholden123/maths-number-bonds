@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { Redirect } from "react-router-dom";
 import './Task.css';
 import Initials from '../../components/Initials/Initials'
 import Problem from '../../components/Problem/Problem'
 import Grid from '../../components/Results/Grid/Grid'
+import PhasesKey from '../../components/Keys/Phases'
+import AnswersKey from '../../components/Keys/Answers'
 import urlHelper from '../../helpers/url'
 import phasesHelper from '../../helpers/phases'
 
@@ -12,6 +15,7 @@ class Task extends Component {
     this.setInitials = this.setInitials.bind(this)
     this.startTask = this.startTask.bind(this)
     this.answerQuestion = this.answerQuestion.bind(this)
+    this.goHome = this.goHome.bind(this)
 
     // Set initials
     const initialsFromUrl = urlHelper.getParamValuesFromUrl('initials', this.props.location.search)
@@ -35,7 +39,8 @@ class Task extends Component {
       questions: shuffledQuestions,
       taskStarted: false,
       taskFinished: false,
-      currentQuestionIndex: 0
+      currentQuestionIndex: 0,
+      shouldRedirectHome: false
     }
   }
 
@@ -45,6 +50,12 @@ class Task extends Component {
 
   startTask() {
     this.setState({ taskStarted: true })
+  }
+
+  goHome() {
+    if (!window && !window.confirm) return
+    const result = window.confirm('Are you sure you want to go back? You will lose all results recorded on this page.')
+    if (result) this.setState({ shouldRedirectHome: true })
   }
 
   answerQuestion(answer, timeToAnswerMs) {
@@ -64,6 +75,9 @@ class Task extends Component {
   }
 
   render() {
+    if (this.state.shouldRedirectHome) {
+      return (<Redirect to='/' />)
+    }
     return (
       <div className="task">
         <h1>{this.state.taskType}</h1>
@@ -83,10 +97,12 @@ class Task extends Component {
         )}
         {this.state.taskFinished && (
           <>
-            <Grid
-              questions={this.state.questions}
-            />
-            <button>Main Menu</button>
+            <Grid questions={this.state.questions} />
+            <div id='keys'>
+              <PhasesKey chosenPhases={this.state.transformedPhases} />
+              <AnswersKey />
+            </div>
+            <button onClick={this.goHome}>Main Menu</button>
             <button>Export to PDF</button>
           </>
         )}
