@@ -29,6 +29,7 @@ phasesHelper.transformPhases = chosenPhases => {
 
   return chosenPhases.map(chosenPhase => {
     chosenPhase.bonds.forEach(bond => {
+      if (bond.y === bond.x) return
       chosenPhase.bonds.push({ x: bond.y, y: bond.x });
     });
     return chosenPhase;
