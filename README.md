@@ -2,6 +2,10 @@
 
 A simple web app that helps students practice and assess their number bonds.
 
+This project has been designed for desktop and tablet devices mainly but does contain some responsive elements. Further work may be required however for this app to display nicely on mobile devices.
+
+Some additional configurations can be made before building the project by accessing the configuration files in the `/src/config` directory.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
