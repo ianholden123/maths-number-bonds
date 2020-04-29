@@ -8,12 +8,22 @@
     box-sizing: border-box;
 }
 
-.Cell span {
-    align-content: center;
-    display: grid;
+.Cell.header {
+    background-color: var(--black-color);
+    color: var(--white-color);
 }
 
-.Cell.header {
-    background-color: black;
-    color: white;
+.Cell div {
+    align-content: center;
+    display: grid;
+    width: 100%;
+    position: relative;
 }
+
+.Cell.correct, .Cell.Cell.incorrect { cursor: pointer; }
+.Cell.correct:hover, .Cell.Cell.incorrect:hover { opacity: 0.7; }
+
+.Cell.correct div { border: 3px solid var(--correct-green); }
+.Cell.correct.line div { background: linear-gradient(to top right, transparent calc(50% - 3px), var(--correct-green), transparent calc(50% + 3px) ) }
+.Cell.incorrect div { border: 3px solid var(--incorrect-red); }
+.Cell.incorrect.line div { background: linear-gradient(to top right, transparent calc(50% - 3px), var(--incorrect-red), transparent calc(50% + 3px) ) }

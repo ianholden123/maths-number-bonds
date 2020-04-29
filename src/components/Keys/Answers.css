@@ -1,0 +1,15 @@
+#answersKey ul li.correct:before { border: 3px solid var(--correct-green); }
+#answersKey ul li.line:before {
+  background: linear-gradient(to top right, var(--white-color) calc(50% - 3px), var(--grey-color), var(--white-color) calc(50% + 3px) );
+  border: 3px solid var(--white-color);
+}
+#answersKey ul li.incorrect:before { border: 3px solid var(--incorrect-red); }
+
+#answersKey ul li:before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: var(--white-color);
+  margin: 5px 5px -7px 0;
+}
