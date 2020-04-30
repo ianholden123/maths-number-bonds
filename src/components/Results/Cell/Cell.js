@@ -12,7 +12,7 @@ class Cell extends Component {
         if (x === '-1' || y === '-1') classNames.push('header')
         data && data.answeredCorrectly === true && classNames.push('correct')
         data && data.answeredCorrectly === false && classNames.push('incorrect')
-        data && data.phase && data.phase.colour && classNames.push(presentationHelper.pickTextColorBasedOnBgColorAdvanced(data.phase.colour))
+        data && data.phase && data.phase.colour && classNames.push(presentationHelper.pickTextColorBasedOnBgColor(data.phase.colour))
         
         return classNames.join(' ').trim()
     }

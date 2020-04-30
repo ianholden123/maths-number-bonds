@@ -6,9 +6,11 @@ let presentationHelper = {}
  * @param bgColor The background colour that you would like to know the most suitable overlaying text colour for.
  * @returns A string - either 'light-color' or 'dark-color'.
  */
-presentationHelper.pickTextColorBasedOnBgColorAdvanced = (bgColor) => {
-  if (bgColor.charAt(0) !== '#')
+presentationHelper.pickTextColorBasedOnBgColor = (bgColor) => {
+  if (!bgColor || typeof bgColor !== 'string' || bgColor.charAt(0) !== '#') {
     console.warn(`Unable to pick a text colour based on the given background colour: '${bgColor}'. Please provide a new colour in the correct HEX format (e.g. '#0000FF' instead of 'blue').`)
+    return 'dark-color'
+  }
 
   var color = (bgColor.charAt(0) === '#') ? bgColor.substring(1, 7) : bgColor;
   var r = parseInt(color.substring(0, 2), 16); // hexToR

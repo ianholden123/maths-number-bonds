@@ -48,7 +48,7 @@ phasesHelper.createQuestionsFromPhases = transformedPhases => {
   let questions = [];
   transformedPhases.forEach(transformedPhase => {
     if (!transformedPhase.bonds || !Array.isArray(transformedPhase.bonds))
-      return new Error('Sorry, we could not find the bonds in this phase');
+      throw new Error('Sorry, we could not find the bonds in this phase');
 
     transformedPhase.bonds.forEach(bond => {
       questions.push({
@@ -76,6 +76,9 @@ phasesHelper.createQuestionsFromPhases = transformedPhases => {
  * @returns An array with the elements in a different order than the input array. 
  */
 phasesHelper.shuffleArray = array => {
+  if (!array || !Array.isArray(array))
+    throw new Error('Sorry, there was an error shuffling your array');
+
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
     [array[i], array[j]] = [array[j], array[i]]; // swap elements array[i] and array[j]
