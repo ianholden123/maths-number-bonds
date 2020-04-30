@@ -4,7 +4,11 @@ A simple web app that helps students practice and assess their number bonds.
 
 This project has been designed for desktop and tablet devices mainly but does contain some responsive elements. Further work may be required however for this app to display nicely on mobile devices.
 
+## Customising this project
+
 Some additional configurations can be made before building the project by accessing the configuration files in the `/src/config` directory.
+
+If you intend on making changes to the colour of each phase in the `/src/config/phases.js` file, be aware that HEX colour values will work best. For example, instead of using a colour value such as `blue`, use `#0000ff`. Note that we have specified the hash (#) before the RGB value too. This is important for manipulating the font colour on the results grid.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

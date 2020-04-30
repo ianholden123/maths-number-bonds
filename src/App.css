@@ -65,3 +65,16 @@ button.selected {
 .bg-secondary { background-color: var(--secondary-color); }
 .bg-secondary-light { background-color: var(--secondary-color-light); }
 .bg-secondary-dark { background-color: var(--secondary-color-dark); }
+
+/** Print Styles **/
+@media print {
+    .AppContainer .App {
+        border: none;
+        border-radius: none;
+        margin: 0;
+    }
+
+    button {
+        display: none;
+    }
+}

@@ -16,6 +16,7 @@ class Task extends Component {
     this.startTask = this.startTask.bind(this)
     this.answerQuestion = this.answerQuestion.bind(this)
     this.goHome = this.goHome.bind(this)
+    this.finishEarly = this.finishEarly.bind(this)
 
     // Set initials
     const initialsFromUrl = urlHelper.getParamValuesFromUrl('initials', this.props.location.search)
@@ -58,6 +59,17 @@ class Task extends Component {
     if (result) this.setState({ shouldRedirectHome: true })
   }
 
+  finishEarly() {
+    if (!window && !window.confirm) return
+    const result = window.confirm('Are you sure you are finished? Confirming will take you to the results page.')
+    if (result) this.setState({ taskFinished: true })
+  }
+
+  openPrint() {
+    if (!window && !window.print) return
+    window.print()
+  }
+
   answerQuestion(answer, timeToAnswerMs) {
     if (this.state.taskFinished) return
     const { x: firstNumber, y: secondNumber } = this.state.questions[this.state.currentQuestionIndex]
@@ -89,11 +101,15 @@ class Task extends Component {
           <button onClick={this.startTask}>Begin {this.state.taskType}</button>
         )}
         {this.state.initials && this.state.taskStarted && !this.state.taskFinished && (
-          <Problem
-            number1={this.state.questions[this.state.currentQuestionIndex].x}
-            number2={this.state.questions[this.state.currentQuestionIndex].y}
-            answerQuestion={this.answerQuestion}
-          />
+          <>
+            <Problem
+              number1={this.state.questions[this.state.currentQuestionIndex].x}
+              number2={this.state.questions[this.state.currentQuestionIndex].y}
+              answerQuestion={this.answerQuestion}
+            />
+            <hr/>
+            <button onClick={this.finishEarly}>Finish early</button>
+          </>
         )}
         {this.state.taskFinished && (
           <>
@@ -103,7 +119,7 @@ class Task extends Component {
               <AnswersKey />
             </div>
             <button onClick={this.goHome}>Main Menu</button>
-            <button>Export to PDF</button>
+            <button onClick={this.openPrint}>Print</button>
           </>
         )}
       </div>
