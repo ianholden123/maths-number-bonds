@@ -19,7 +19,7 @@ class SelectPhases extends Component {
         <button
           key={phase.id}
           onClick={() => {this.selectPhase(phase.id)}}
-          className={this.state.selectedPhases.includes(phase.id) ? 'selected' : false}
+          className={this.state.selectedPhases.includes(phase.id) ? 'selected' : undefined}
         >
           <strong>{phase.name}</strong>
           <p>{phase.description}</p>
@@ -65,7 +65,7 @@ class SelectPhases extends Component {
           {this.getPhaseButtons()}
           <button 
             onClick={this.toggleAllPhases}
-            className={this.state.selectedPhases.length === phases.length ? 'selected' : false}
+            className={this.state.selectedPhases.length === phases.length ? 'selected' : undefined}
           >
             { this.state.selectedPhases.length === phases.length ? 'Deselect all phases' : 'Select all phases'}
           </button>

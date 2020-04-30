@@ -1,7 +1,12 @@
 let cellGenerator = {}
 
+/**
+ * Generates a list of cells based on the phases that are given to it
+ * @param phases - A phases object.
+ * @param answeredQuestions - An array of every cell and the answers that were or were not given against them.
+ */
 cellGenerator.generateCellsFromPhases = (phases, answeredQuestions) => {
-    if (!phases || typeof phases !== 'object' || phases.length === 0) return null
+    if (!phases || !Array.isArray(phases) || phases.length === 0) return null
 
     let cells = []
     const yAxisValue = cellGenerator.getAxisRange(phases, 'y')
@@ -32,7 +37,7 @@ cellGenerator.generateCellsFromPhases = (phases, answeredQuestions) => {
  * @param axis - A string containing 'x' or 'y'.
  */
 cellGenerator.getAxisRange = (phases, axis) => {
-  if (!phases || typeof phases !== 'object' || phases.length === 0) return null
+  if (!phases || !Array.isArray(phases) || phases.length === 0) return null
   if (axis !== 'x' && axis !== 'y') return null
 
   let minAxisValue = Number.MAX_SAFE_INTEGER

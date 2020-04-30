@@ -24,7 +24,7 @@ describe('getPhasesFromIds', () => {
         name: 'Blanks',
         description: '',
         number: 10,
-        colour: 'white',
+        colour: '#ffffff',
         bonds: [
             {
                 x: 5,
