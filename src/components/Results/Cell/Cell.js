@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'; 
 import './Cell.css';
+import presentationHelper from '../../../helpers/presentation'
 import { quickAnswerTime } from '../../../config/variables'
 
 class Cell extends Component {
@@ -11,25 +12,22 @@ class Cell extends Component {
         if (x === '-1' || y === '-1') classNames.push('header')
         data && data.answeredCorrectly === true && classNames.push('correct')
         data && data.answeredCorrectly === false && classNames.push('incorrect')
-        data && data.timeToAnswer < quickAnswerTime && classNames.push('line')
+        data && data.phase && data.phase.colour && classNames.push(presentationHelper.pickTextColorBasedOnBgColorAdvanced(data.phase.colour))
         
         return classNames.join(' ').trim()
-    }
-
-    getStyles() {
-        const {data} = this.props
-        let styles = {}
-        if (data && data.phase && data.phase.colour) styles.backgroundColor = data.phase.colour
-        return styles
     }
 
     render() {
         return (
             <div
                 className={this.getClassNames()}
-                style={this.getStyles()}
                 onClick={() => this.props.handleSelectedCell ? this.props.handleSelectedCell(this.props.data) : false}
             >
+                { /* SVG's are being favoured here as a background colour to provide a better outcome when printing to PDF */ }
+                <svg id='phase-background'><rect width="100%" height="100%" fill={this.props.data.phase.colour ? this.props.data.phase.colour : 'transparent'} /></svg>
+                { this.props.data && this.props.data.timeToAnswer && this.props.data.timeToAnswer < quickAnswerTime &&
+                    <svg id='strikethrough'><line x1="0" y1="0" x2="100%" y2="100%" strokeWidth='4' /></svg>
+                }
                 <div>
                     {this.props.children}
                 </div>

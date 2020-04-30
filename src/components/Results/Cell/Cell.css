@@ -6,7 +6,11 @@
     border-right: 1px solid var(--black-color);
     border-bottom: 1px solid var(--black-color);
     box-sizing: border-box;
+    position: relative;
 }
+
+.Cell.light-color { color: var(--white-color); }
+.Cell.dark-color { color: var(--black-color); }
 
 .Cell.header {
     background-color: var(--black-color);
@@ -20,10 +24,18 @@
     position: relative;
 }
 
+.Cell svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.Cell.correct svg#strikethrough { stroke: var(--correct-green); }
+.Cell.incorrect svg#strikethrough { stroke: var(--incorrect-red); }
+
 .Cell.correct, .Cell.Cell.incorrect { cursor: pointer; }
 .Cell.correct:hover, .Cell.Cell.incorrect:hover { opacity: 0.7; }
 
 .Cell.correct div { border: 3px solid var(--correct-green); }
-.Cell.correct.line div { background: linear-gradient(to top right, transparent calc(50% - 3px), var(--correct-green), transparent calc(50% + 3px) ) }
 .Cell.incorrect div { border: 3px solid var(--incorrect-red); }
-.Cell.incorrect.line div { background: linear-gradient(to top right, transparent calc(50% - 3px), var(--incorrect-red), transparent calc(50% + 3px) ) }

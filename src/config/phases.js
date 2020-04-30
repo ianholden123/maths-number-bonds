@@ -4,7 +4,7 @@ const phases = [
         name: 'Phase 1',
         description: 'Adding 1',
         number: 1,
-        colour: 'blue',
+        colour: '#0000ff',
         bonds: [
             {
                 x: 2,
@@ -41,7 +41,7 @@ const phases = [
         name: 'Phase 2',
         description: 'Doubles',
         number: 2,
-        colour: 'orange',
+        colour: '#ffa502',
         bonds: [
             {
                 x: 1,
@@ -70,7 +70,7 @@ const phases = [
         name: 'Phase 3',
         description: 'Adding 2',
         number: 3,
-        colour: 'salmon',
+        colour: '#fa7f71',
         bonds: [
             {
                 x: 2,
@@ -103,7 +103,7 @@ const phases = [
         name: 'Phase 4',
         description: 'Bonds to 10',
         number: 4,
-        colour: 'yellow',
+        colour: '#feff04',
         bonds: [
             {
                 x: 10,
@@ -132,7 +132,7 @@ const phases = [
         name: 'Phase 5',
         description: 'Doubles to 20',
         number: 5,
-        colour: 'brown',
+        colour: '#a52a2b',
         bonds: [
             {
                 x: 6,
@@ -161,7 +161,7 @@ const phases = [
         name: 'Phase 6',
         description: 'Adding 10',
         number: 6,
-        colour: 'purple',
+        colour: '#800180',
         bonds: [
             {
                 x: 10,
@@ -206,7 +206,7 @@ const phases = [
         name: 'Phase 7',
         description: 'Adding 0',
         number: 7,
-        colour: 'green',
+        colour: '#007f01',
         bonds: [
             {
                 x: 0,
@@ -255,7 +255,7 @@ const phases = [
         name: 'Phase 8',
         description: 'Near Doubles',
         number: 8,
-        colour: 'grey',
+        colour: '#7f7f7f',
         bonds: [
             {
                 x: 4,
@@ -288,7 +288,7 @@ const phases = [
         name: 'Phase 9',
         description: 'Bridging & Compensation',
         number: 9,
-        colour: 'pink',
+        colour: '#ffc0cc',
         bonds: [
             {
                 x: 3,
@@ -341,7 +341,7 @@ const phases = [
         name: 'Blanks',
         description: '',
         number: 10,
-        colour: 'white',
+        colour: '#ffffff',
         bonds: [
             {
                 x: 5,
