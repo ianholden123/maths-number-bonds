@@ -56,7 +56,7 @@ This project has been designed for desktop and tablet devices mainly but does co
 
 This project could definitely benefit from some more unit tests.
 
-If you would be interested in contributing to this project, check out the [CONTRIBUTION docs]().
+If you would be interested in contributing to this project, check out the [contributing documentation](CONTRIBUTING.md).
 
 ## Support
 
