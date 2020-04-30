@@ -2,7 +2,47 @@
 
 A simple web app that helps students practice and assess their number bonds.
 
-This project has been designed for desktop and tablet devices mainly but does contain some responsive elements. Further work may be required however for this app to display nicely on mobile devices.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
+
+## Installation
+
+#### Prerequisites
+
+You must have [Node](https://nodejs.org/en/) and **NPM** installed before you can work with this project.
+
+#### Install dependencies
+
+In the project directory, you must first install the project's dependencies using npm:
+
+`npm install`
+
+#### Development
+
+To run the app in development mode, run the following script:
+
+`npm start`
+
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+#### Building the project
+
+To build the project in preparation for it to be hosted on a production environment, you must run the following script:
+
+`npm run build`
+
+This will build the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
+
+Your app is ready to be deployed!
+
+## Other Available Scripts
+
+#### Run tests
+
+Run the following script to launch the test runner in the interactive watch mode:
+
+`npm test`
 
 ## Customising this project
 
@@ -10,28 +50,18 @@ Some additional configurations can be made before building the project by access
 
 If you intend on making changes to the colour of each phase in the `/src/config/phases.js` file, be aware that HEX colour values will work best. For example, instead of using a colour value such as `blue`, use `#0000ff`. Note that we have specified the hash (#) before the RGB value too. This is important for manipulating the font colour on the results grid.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Possible improvements
 
-## Available Scripts
+This project has been designed for desktop and tablet devices mainly but does contain some responsive elements. Further work may be required however for this app to display nicely on mobile devices.
 
-In the project directory, you can run:
+This project could definitely benefit from some more unit tests.
 
-### `npm start`
+If you would be interested in contributing to this project, check out the [CONTRIBUTION docs]().
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Support
 
-### `npm test`
+For support on this project, you can get in contact with Ian Holden by [email](mailto:ianholdendev@outlook.com).
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Contributing
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+If you wish to contribute to this project, please read the [contributing document](CONTRIBUTING.md).
