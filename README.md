@@ -1,6 +1,6 @@
 # Maths Number Bonds
 
-A simple web app that helps students practice and assess their number bonds.
+A progressive web application that helps students practice and assess their number bonds.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -8,17 +8,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Installation
 
-#### Prerequisites
+### Install dependencies
 
-You must have [Node](https://nodejs.org/en/) and **NPM** installed before you can work with this project.
-
-#### Install dependencies
-
-In the project directory, you must first install the project's dependencies using npm:
+You must have [Node](https://nodejs.org/en/) and **NPM** installed before you can work with this project. In the project directory, you must first install the project's dependencies using npm:
 
 `npm install`
 
-#### Development
+### Development
 
 To run the app in development mode, run the following script:
 
@@ -26,7 +22,7 @@ To run the app in development mode, run the following script:
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-#### Building the project
+### Building the project
 
 To build the project in preparation for it to be hosted on a production environment, you must run the following script:
 
@@ -36,9 +32,7 @@ This will build the app for production to the `build` folder. It correctly bundl
 
 Your app is ready to be deployed!
 
-## Other Available Scripts
-
-#### Run tests
+## Testing
 
 Run the following script to launch the test runner in the interactive watch mode:
 
