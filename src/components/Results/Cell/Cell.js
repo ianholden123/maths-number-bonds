@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'; 
 import './Cell.css';
 import presentationHelper from '../../../helpers/presentation'
-import { quickAnswerTime } from '../../../config/variables'
 
 class Cell extends Component {
     getClassNames() {
@@ -18,6 +17,8 @@ class Cell extends Component {
     }
 
     render() {
+        const { quickAnswerTime } = this.props.settings
+        
         return (
             <div
                 className={this.getClassNames()}

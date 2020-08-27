@@ -113,10 +113,10 @@ class Task extends Component {
         )}
         {this.state.taskFinished && (
           <>
-            <Grid questions={this.state.questions} />
+            <Grid questions={this.state.questions} settings={this.props.settings} />
             <div id='keys'>
               <PhasesKey chosenPhases={this.state.transformedPhases} />
-              <AnswersKey />
+              <AnswersKey settings={this.props.settings} />
             </div>
             <button onClick={this.goHome}>Main Menu</button>
             <button onClick={this.openPrint}>Print</button>

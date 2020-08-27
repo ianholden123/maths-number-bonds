@@ -35,7 +35,7 @@ class Grid extends Component {
     // Create the grid header along the x axis
     for (let n = 0; n < cells.length +1; n++) {
       output.push(
-        <Cell key={`${n-1},-1`} x={n-1} y='-1' data={emptyCellData}>
+        <Cell key={`${n-1},-1`} x={n-1} y='-1' data={emptyCellData} settings={this.props.settings}>
           <span>{n === 0 ? '+' : n -1}</span>
         </Cell>
       )
@@ -44,7 +44,7 @@ class Grid extends Component {
     for (let y = 0; y < cells.length; y++) {
       // Create the grid header along the y axis
       output.push(
-        <Cell key={`-1,${y}`} x='-1' y={y-1} data={emptyCellData}>
+        <Cell key={`-1,${y}`} x='-1' y={y-1} data={emptyCellData} settings={this.props.settings}>
           <span>{y}</span>
         </Cell>
       )
@@ -56,6 +56,7 @@ class Grid extends Component {
             x={x}
             y={y}
             data={cells[x][y]}
+            settings={this.props.settings}
             handleSelectedCell={this.handleSelectedCell}
           >
             <span>{`${y} + ${x}`}</span>

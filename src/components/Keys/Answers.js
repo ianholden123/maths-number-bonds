@@ -1,9 +1,11 @@
 import React from 'react'
 import './Answers.css'
-import { quickAnswerTime } from '../../config/variables'
 
-const AnswersKey = () => (
-  <div id='answersKey' className='key'>
+const AnswersKey = props => {
+  const { quickAnswerTime } = props.settings
+
+  return (
+    <div id='answersKey' className='key'>
     Answered:
     <ul>
       <li className='correct'>Correctly</li>
@@ -16,6 +18,7 @@ const AnswersKey = () => (
       </li>
     </ul>
   </div>
-)
+  )
+}
 
 export default AnswersKey
