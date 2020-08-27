@@ -1,16 +1,32 @@
+.task {
+  position: relative;
+}
+
 #keys {
   text-align: left;
-  padding: 20px;
   margin: 20px;
-  border-radius: 20px;
-  display: flex;
 }
 
 .key ul {
   list-style-type: none;
   padding: 0;
+  margin-top: 5px;
 }
 
 .key ul li {
   margin: 0 20px 5px 0;
+}
+
+p.initials {
+  position: absolute;
+  top: -10px;
+  right: 0;
+  margin: 20px;
+}
+
+@media print {
+  div.task h1 {
+    font-size: 1.2em;
+    margin: 0 0 15px 0;
+  }
 }
