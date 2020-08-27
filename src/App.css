@@ -32,6 +32,7 @@ body {
     border: 10px solid var(--primary-color-light);
     border-radius: 20px;
     margin: 0 20px;
+    position: relative;
 }
 
 input {
