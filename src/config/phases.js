@@ -338,8 +338,8 @@ const phases = [
     },
     {
         id: 9,
-        name: 'Blanks',
-        description: 'Blanks',
+        name: 'Other',
+        description: 'Other Number Bonds (Plus 3)',
         number: 10,
         colour: '#ffffff',
         bonds: [
