@@ -5,6 +5,9 @@ class Initials extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      initialsValue: ''
+    }
     this.handleStartClick = this.handleStartClick.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
