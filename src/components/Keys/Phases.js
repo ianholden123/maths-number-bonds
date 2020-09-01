@@ -8,7 +8,7 @@ const PhasesKey = ({ chosenPhases }) => (
     <ul>
       {chosenPhases.map((phase, index) => (
         <li className={`phase${phase.number}`} key={index}>
-          <div style={{ backgroundColor: phase.colour, border: `4px solid ${phase.colour}` }} />
+          <div className='phaseSquare' style={{ backgroundColor: phase.colour, border: `4px solid ${phase.colour}` }} />
           P.{phase.number} { phase.description && `- ${phase.description}` }
         </li>
       ))}
