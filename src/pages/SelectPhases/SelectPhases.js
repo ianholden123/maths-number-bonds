@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import './SelectPhases.css';
 import phases from '../../config/phases'
+import BackButton from '../../components/BackButton/BackButton'
 
 class SelectPhases extends Component {
   constructor(props) {
@@ -60,6 +61,7 @@ class SelectPhases extends Component {
     const queryParamPhases = encodeURIComponent(this.state.selectedPhases.join(','))
     return (
       <div className={this.props.taskType}>
+        <BackButton />
         <h1>{this.props.title}</h1>
         <div className="phaseButtons">
           {this.getPhaseButtons()}

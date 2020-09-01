@@ -7,7 +7,7 @@ import {ReactComponent as BackLogo} from './Back.svg';
 class BackButton extends Component {
   render() {
     return (
-      <Link to="/">
+      <Link to={this.props.to || '/'}>
         <button className='back-btn'>
           <BackLogo />
         </button>
@@ -17,9 +17,7 @@ class BackButton extends Component {
 }
 
 BackButton.propTypes = {
-  settings: PropTypes.shape({
-    quickAnswerTime: PropTypes.number
-  })
+  to: PropTypes.string
 }
 
 export default BackButton;

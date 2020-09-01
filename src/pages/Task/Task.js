@@ -6,6 +6,8 @@ import Problem from '../../components/Problem/Problem'
 import Grid from '../../components/Results/Grid/Grid'
 import PhasesKey from '../../components/Keys/Phases'
 import AnswersKey from '../../components/Keys/Answers'
+import BackButton from '../../components/BackButton/BackButton'
+import Targets from '../../components/Results/Targets/Targets'
 import urlHelper from '../../helpers/url'
 import phasesHelper from '../../helpers/phases'
 
@@ -92,6 +94,7 @@ class Task extends Component {
     }
     return (
       <div className="task">
+        {!this.state.taskStarted && <BackButton />}
         <h1>{this.state.taskType}</h1>
         {this.state.initials ? <p className="initials">Initials: {this.state.initials}</p> : ''}
         {!this.state.initials && (
@@ -117,6 +120,9 @@ class Task extends Component {
             <div id='keys'>
               <PhasesKey chosenPhases={this.state.transformedPhases} />
               <AnswersKey settings={this.props.settings} />
+            </div>
+            <div id='targets'>
+              <Targets answeredQuestions={this.state.questions} />
             </div>
             <button onClick={this.goHome}>Main Menu</button>
             <button onClick={this.openPrint}>Print</button>
