@@ -121,9 +121,11 @@ class Task extends Component {
               <PhasesKey chosenPhases={this.state.transformedPhases} />
               <AnswersKey settings={this.props.settings} />
             </div>
+            <hr />
             <div id='targets'>
               <Targets answeredQuestions={this.state.questions} />
             </div>
+            <hr />
             <button onClick={this.goHome}>Main Menu</button>
             <button onClick={this.openPrint}>Print</button>
           </>

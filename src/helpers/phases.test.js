@@ -21,8 +21,8 @@ describe('getPhasesFromIds', () => {
     it('should return the phase that has the given phase ID', () => {
       const output = [{
         id: 9,
-        name: 'Blanks',
-        description: '',
+        name: 'Other',
+        description: 'Other Number Bonds (Plus 3)',
         number: 10,
         colour: '#ffffff',
         bonds: [
