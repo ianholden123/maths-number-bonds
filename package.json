@@ -1,6 +1,6 @@
 {
-  "name": "maths_app",
-  "version": "0.1.0",
+  "name": "maths_number_bonds",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "prop-types": "^15.7.2",
@@ -29,5 +29,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.4"
   }
 }
