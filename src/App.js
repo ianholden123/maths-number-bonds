@@ -6,6 +6,7 @@ import SelectPhases from './pages/SelectPhases/SelectPhases'
 import Task from './pages/Task/Task'
 import Settings from './pages/Settings/Settings'
 import { quickAnswerTime } from './config/variables'
+import GA from './utils/GoogleAnalytics'
 
 class App extends Component {
   constructor(props) {
@@ -41,6 +42,7 @@ class App extends Component {
       <div className="AppContainer">
         <div className="App">
           <Router>
+            { GA.init() && <GA.RouteTracker /> }
             <Switch>
               <Route exact path="/">
                 <Home />
