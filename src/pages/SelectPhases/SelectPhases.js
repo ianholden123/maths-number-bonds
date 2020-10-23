@@ -1,26 +1,21 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import './SelectPhases.css';
 import phases from '../../config/phases'
 import BackButton from '../../components/BackButton/BackButton'
 
-class SelectPhases extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { selectedPhases: [] }
-    
-    this.toggleAllPhases = this.toggleAllPhases.bind(this)
-  }
+const SelectPhases = (props) => {
+  const [selectedPhases, setSelectedPhases] = useState([]);
 
-  getPhaseButtons() {
-    let buttons = [];
+  const getPhaseButtons = () => {
+    const buttons = []
     phases.forEach(phase => {
       if ((!phase.id && phase.id < 0) || !phase.name || !phase.description) return;
       buttons.push(
         <button
           key={phase.id}
-          onClick={() => {this.selectPhase(phase.id)}}
-          className={this.state.selectedPhases.includes(phase.id) ? 'selected' : undefined}
+          onClick={() => { selectPhase(phase.id) }}
+          className={selectedPhases.includes(phase.id) ? 'selected' : undefined}
         >
           <strong>{phase.name}</strong>
           <p>{phase.description}</p>
@@ -30,9 +25,9 @@ class SelectPhases extends Component {
     return buttons;
   }
 
-  selectPhase(id) {
-    const selectedIndex = this.state.selectedPhases.indexOf(id)
-    let newArray = this.state.selectedPhases
+  const selectPhase = (id) => {
+    const selectedIndex = selectedPhases.indexOf(id)
+    let newArray = [...selectedPhases]
 
     if (selectedIndex > -1) {
       newArray.splice(selectedIndex, 1)
@@ -40,50 +35,56 @@ class SelectPhases extends Component {
       newArray.push(id)
     }
 
-    this.setState({selectedPhases: newArray})
-  }
+    setSelectedPhases(newArray)
+  };
 
-  toggleAllPhases() {
+  const toggleAllPhases = () => {
     // Empty selected phases if they are all already selected
-    if (this.state.selectedPhases.length === phases.length) {
-      this.setState({ selectedPhases: [] })
+    if (selectedPhases.length === phases.length) {
+      setSelectedPhases([])
     // Select all phases if they are not all already selected
     } else {
-      phases.forEach(phase => {
-        if (!this.state.selectedPhases.includes(phase.id)) {
-          this.selectPhase(phase.id)
-        }
-      })
+      setSelectedPhases(phases.map(phase => phase.id))
     }
-  }
-  
-  render() {
-    const queryParamPhases = encodeURIComponent(this.state.selectedPhases.join(','))
-    return (
-      <div className={this.props.taskType}>
-        <BackButton />
-        <h1>{this.props.title}</h1>
-        <div className="phaseButtons">
-          {this.getPhaseButtons()}
-          <button 
-            onClick={this.toggleAllPhases}
-            className={this.state.selectedPhases.length === phases.length ? 'selected' : undefined}
-          >
-            { this.state.selectedPhases.length === phases.length ? 'Deselect all phases' : 'Select all phases'}
-          </button>
-        </div>
-        {
-          this.state.selectedPhases.length > 0 ?
-            <Link to={`/task?phases=${queryParamPhases}&taskType=${this.props.taskType}`}>
-              <button className="bg-primary">Start {this.props.taskType}</button>
-            </Link>
-          :
-            <button disabled className="bg-primary">Start {this.props.taskType}</button>
-        }
-        
+  };
+
+  const queryParamPhases = encodeURIComponent(selectedPhases.join(','));
+
+  return (
+    <div className={props.taskType}>
+      <BackButton />
+      <h1>{props.title}</h1>
+      <div className="phaseButtons">
+        {getPhaseButtons()}
+        <button
+          onClick={() => toggleAllPhases()}
+          className={selectedPhases.length === phases.length ? 'selected' : undefined}
+        >
+          { selectedPhases.length === phases.length ? 'Deselect all phases' : 'Select all phases'}
+        </button>
       </div>
-    );
-  }
+      {
+        selectedPhases.length > 0
+          ? (
+            <Link to={`/task?phases=${queryParamPhases}&taskType=${props.taskType}`}>
+              <button className="bg-primary">
+                Start
+                {' '}
+                {props.taskType}
+              </button>
+            </Link>
+          )
+          : (
+            <button disabled className="bg-primary">
+              Start
+              {' '}
+              {props.taskType}
+            </button>
+          )
+      }
+
+    </div>
+  );
 }
 
 export default SelectPhases;

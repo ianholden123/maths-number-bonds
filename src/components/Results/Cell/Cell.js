@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types'; 
 import './Cell.css';
 import presentationHelper from '../../../helpers/presentation'
 
-class Cell extends Component {
-    getClassNames() {
-        const {x, y, data} = this.props
+const Cell = (props) => {
+    const getClassNames = () => {
+        const {x, y, data} = props
         let classNames = ['Cell']
 
         if (x === '-1' || y === '-1') classNames.push('header')
@@ -16,25 +16,23 @@ class Cell extends Component {
         return classNames.join(' ').trim()
     }
 
-    render() {
-        const { quickAnswerTime } = this.props.settings
-        
-        return (
-            <div
-                className={this.getClassNames()}
-                onClick={() => this.props.handleSelectedCell ? this.props.handleSelectedCell(this.props.data) : false}
-            >
-                { /* SVG's are being favoured here as a background colour to provide a better outcome when printing to PDF */ }
-                <svg id='phase-background'><rect width="100%" height="100%" fill={this.props.data.phase.colour ? this.props.data.phase.colour : 'transparent'} /></svg>
-                { this.props.data && this.props.data.timeToAnswer && this.props.data.timeToAnswer < quickAnswerTime &&
-                    <svg id='strikethrough'><line x1="0" y1="0" x2="100%" y2="100%" strokeWidth='4' /></svg>
-                }
-                <div>
-                    {this.props.children}
-                </div>
+    const { quickAnswerTime } = props.settings
+    
+    return (
+        <div
+            className={getClassNames()}
+            onClick={() => props.handleSelectedCell ? props.handleSelectedCell(props.data) : false}
+        >
+            { /* SVG's are being favoured here as a background colour to provide a better outcome when printing to PDF */ }
+            <svg id='phase-background'><rect width="100%" height="100%" fill={props.data.phase.colour ? props.data.phase.colour : 'transparent'} /></svg>
+            { props.data && props.data.timeToAnswer && props.data.timeToAnswer < quickAnswerTime &&
+                <svg id='strikethrough'><line x1="0" y1="0" x2="100%" y2="100%" strokeWidth='4' /></svg>
+            }
+            <div>
+                {props.children}
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 Cell.propTypes = {
