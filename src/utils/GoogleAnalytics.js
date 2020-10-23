@@ -6,7 +6,7 @@ import { Route } from 'react-router-dom';
 const GoogleAnalytics = (props) => {
   useEffect(() => {
     logPageChange(props.location.pathname, props.location.search);
-  }, [props.location.pathname, props.location.search])
+  }, [logPageChange, props.location.pathname, props.location.search])
 
   const logPageChange = (pathname, search = '') => {
     const page = pathname + search;
