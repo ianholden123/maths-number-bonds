@@ -14,7 +14,7 @@ const GoogleAnalytics = (props) => {
     ReactGA.set({
         page,
         location: `${location.origin}${page}`,
-        ...this.props.options
+        ...props.options
     });
     ReactGA.pageview(page);
   }
