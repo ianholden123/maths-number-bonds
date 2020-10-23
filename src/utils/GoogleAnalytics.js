@@ -17,7 +17,7 @@ const GoogleAnalytics = (props) => {
     }
 
     logPageChange(props.location.pathname, props.location.search);
-  }, [props.location.pathname, props.location.search])
+  }, [props.location.pathname, props.location.search, props.options])
 
   return null;
 }
