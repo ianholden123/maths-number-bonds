@@ -1,36 +1,17 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './Problem.css';
 import Numpad from '../Numpad/Numpad'
 
-class Problem extends Component {
-  constructor(props) {
-    super(props)
+const Problem = (props) => {
+  const [currentAnswer, setCurrentAnswer] = useState('')
+  const [problemStartDateTime, setProblemStartDateTime] = useState(new Date())
 
-    this.handleNumpadButtonPress = this.handleNumpadButtonPress.bind(this)
-    this.submitAnswer = this.submitAnswer.bind(this)
-    this.resetState = this.resetState.bind(this)
-
-    this.state = {
-      currentAnswer: '',
-      problemStartDateTime: new Date(),
-      problemEndDateTime: null
-    }
+  const resetState = () => {
+    setCurrentAnswer('')
+    setProblemStartDateTime(new Date())
   }
 
-  componentDidMount(){
-    this.nameInput.focus();
-  }
-
-  resetState() {
-    this.setState({
-      currentAnswer: '',
-      problemStartDateTime: new Date(),
-      problemEndDateTime: null
-    })
-  }
-
-  handleNumpadButtonPress(value) {
-    let curAns = this.state.currentAnswer
+  const handleNumpadButtonPress = (value) => {
     switch(value) {
       case '0':
       case '1':
@@ -42,58 +23,53 @@ class Problem extends Component {
       case '7':
       case '8':
       case '9':
-        this.setState({ currentAnswer: curAns + value })
+        setCurrentAnswer(currentAnswer + value)
         break
       case 'B':
-        curAns = curAns.slice(0, - 1)
-        this.setState({currentAnswer: curAns})
+        setCurrentAnswer(currentAnswer.slice(0, - 1))
         break
       case 'E':
-        this.submitAnswer(curAns)
+        submitAnswer(currentAnswer)
         break
       default:
         break
     }
   }
 
-  submitAnswer(answer) {
+  const submitAnswer = (answer) => {
     if (!answer) return
     const problemEndDateTime = new Date()
-    const timeDifference = problemEndDateTime.getTime() - this.state.problemStartDateTime.getTime()
-    this.setState({ problemEndDateTime })
-    this.props.answerQuestion(answer, timeDifference)
-    this.resetState()
+    const timeDifference = problemEndDateTime.getTime() - problemStartDateTime.getTime()
+    props.answerQuestion(answer, timeDifference)
+    resetState()
   }
 
-  handleKeyDown(event) {
-    if (event.key === 'Enter') this.submitAnswer(this.state.currentAnswer)
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') submitAnswer(currentAnswer)
   }
 
-  render() {
-    return (
-      <>
-        <div className="problem">
-          <span id="number1">{this.props.number1}</span>
-          <span id="operator"> + </span>
-          <span id="number2">{this.props.number2}</span>
-          <span id="equals"> = </span>
-          <input
-            ref={(input) => { this.nameInput = input; }}
-            type="number"
-            name="answer"
-            id="answer"
-            value={this.state.currentAnswer}
-            onChange={e => this.setState({ currentAnswer: e.target.value })}
-            onKeyDown={e => this.handleKeyDown(e)}
-          />
-        </div>
-        <Numpad 
-          handleNumpadButtonPress={this.handleNumpadButtonPress}
-          currentAnswer={this.state.currentAnswer}
+  return (
+    <>
+      <div className="problem">
+        <span id="number1">{props.number1}</span>
+        <span id="operator"> + </span>
+        <span id="number2">{props.number2}</span>
+        <span id="equals"> = </span>
+        <input
+          type="number"
+          name="answer"
+          id="answer"
+          value={currentAnswer}
+          onChange={e => setCurrentAnswer(e.target.value)}
+          onKeyDown={e => handleKeyDown(e)}
         />
-      </>
-    );
-  }
+      </div>
+      <Numpad 
+        handleNumpadButtonPress={handleNumpadButtonPress}
+        currentAnswer={currentAnswer}
+      />
+    </>
+  );
 }
 
 export default Problem;
