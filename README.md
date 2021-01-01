@@ -3,6 +3,8 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/21e301d7-dbc1-4866-a80e-7f4b05f84c20/deploy-status)](https://app.netlify.com/sites/admiring-lumiere-b6c474/deploys)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
 
+Access this project here: [https://mathsnumberbonds.com/](https://mathsnumberbonds.com/)
+
 A progressive web application that helps students practice and assess their number bonds.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
