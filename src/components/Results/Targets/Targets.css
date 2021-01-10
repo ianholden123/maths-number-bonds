@@ -1,0 +1,30 @@
+div#targets {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+div#targets .target {
+  padding: 20px;
+  margin: 10px 0;
+  border: 4px solid var(--primary-color-light);
+  border-radius: 10px;
+}
+
+div#targets .target h2 {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+div#targets .target p {
+  margin: 0;
+}
+
+/** Print Styles **/
+@media print {
+  div#targets .target {
+      border: none;
+      border-radius: none;
+      margin: 0;
+  }
+}

@@ -6,3 +6,9 @@
     flex-wrap: wrap;
     position: relative;
 }
+
+@media print {
+    .Grid .Cell:last-child {
+        font-size: 0.9em;
+    }
+}

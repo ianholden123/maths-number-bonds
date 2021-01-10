@@ -1,6 +1,5 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/21e301d7-dbc1-4866-a80e-7f4b05f84c20/deploy-status)](https://app.netlify.com/sites/admiring-lumiere-b6c474/deploys)
 
-
 <p align="center">
   <img src="public/icon-192x192.png" alt="Logo">
 

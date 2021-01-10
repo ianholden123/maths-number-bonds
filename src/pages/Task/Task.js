@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from "react-router-dom";
 import './Task.css';
 import Initials from '../../components/Initials/Initials'
@@ -6,125 +6,111 @@ import Problem from '../../components/Problem/Problem'
 import Grid from '../../components/Results/Grid/Grid'
 import PhasesKey from '../../components/Keys/Phases'
 import AnswersKey from '../../components/Keys/Answers'
+import BackButton from '../../components/BackButton/BackButton'
+import Targets from '../../components/Results/Targets/Targets'
 import urlHelper from '../../helpers/url'
 import phasesHelper from '../../helpers/phases'
 
-class Task extends Component {
-  constructor(props) {
-    super(props)
-    this.setInitials = this.setInitials.bind(this)
-    this.startTask = this.startTask.bind(this)
-    this.answerQuestion = this.answerQuestion.bind(this)
-    this.goHome = this.goHome.bind(this)
-    this.finishEarly = this.finishEarly.bind(this)
+const Task = (props) => {
+  // Set initials
+  const initialsFromUrl = urlHelper.getParamValuesFromUrl('initials', props.location.search)
+  const initialsExtracted = (initialsFromUrl && initialsFromUrl[0]) || ''
 
-    // Set initials
-    const initialsFromUrl = urlHelper.getParamValuesFromUrl('initials', this.props.location.search)
-    const initials = (initialsFromUrl && initialsFromUrl[0]) || null
+  // Set task type
+  const taskTypeFromUrl = urlHelper.getParamValuesFromUrl('taskType', props.location.search)
+  let taskType = (taskTypeFromUrl && taskTypeFromUrl[0]) || ''
+  taskType = taskType.charAt(0).toUpperCase() + taskType.slice(1) // Capitalise task type
 
-    // Set task type
-    const taskTypeFromUrl = urlHelper.getParamValuesFromUrl('taskType', this.props.location.search)
-    const taskType = (taskTypeFromUrl && taskTypeFromUrl[0]) || null
+  // Setup questions for chosen phase(s)
+  const chosenPhaseIds = urlHelper.getParamValuesFromUrl('phases', props.location.search)
+  const chosenPhases = phasesHelper.getPhasesFromIds(chosenPhaseIds)
+  const transformedPhases = phasesHelper.transformPhases(chosenPhases)
+  const questionsFromPhases = phasesHelper.createQuestionsFromPhases(transformedPhases)
+  const shuffledQuestions = phasesHelper.shuffleArray(questionsFromPhases)
 
-    // Setup questions for chosen phase(s)
-    const chosenPhaseIds = urlHelper.getParamValuesFromUrl('phases', this.props.location.search)
-    const chosenPhases = phasesHelper.getPhasesFromIds(chosenPhaseIds)
-    const transformedPhases = phasesHelper.transformPhases(chosenPhases)
-    const questions = phasesHelper.createQuestionsFromPhases(transformedPhases)
-    const shuffledQuestions = phasesHelper.shuffleArray(questions)
+  const [questions, setQuestions] = useState(shuffledQuestions)
+  const [initials, setInitials] = useState(initialsExtracted)
+  const [taskStarted, setTaskStarted] = useState(false)
+  const [taskFinished, setTaskFinished] = useState(false)
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [shouldRedirectHome, setShouldRedirectHome] = useState(false)
 
-    this.state = {
-      taskType: taskType.charAt(0).toUpperCase() + taskType.slice(1),
-      initials,
-      transformedPhases,
-      questions: shuffledQuestions,
-      taskStarted: false,
-      taskFinished: false,
-      currentQuestionIndex: 0,
-      shouldRedirectHome: false
-    }
-  }
-
-  setInitials(initials) {
-    this.setState({ initials })
-  }
-
-  startTask() {
-    this.setState({ taskStarted: true })
-  }
-
-  goHome() {
+  const goHome = () => {
     if (!window && !window.confirm) return
     const result = window.confirm('Are you sure you want to go back? You will lose all results recorded on this page.')
-    if (result) this.setState({ shouldRedirectHome: true })
+    if (result) setShouldRedirectHome(true)
   }
 
-  finishEarly() {
+  const finishEarly = () => {
     if (!window && !window.confirm) return
     const result = window.confirm('Are you sure you are finished? Confirming will take you to the results page.')
-    if (result) this.setState({ taskFinished: true })
+    if (result) setTaskFinished(true)
   }
 
-  openPrint() {
+  const openPrint = () => {
     if (!window && !window.print) return
     window.print()
   }
 
-  answerQuestion(answer, timeToAnswerMs) {
-    if (this.state.taskFinished) return
-    const { x: firstNumber, y: secondNumber } = this.state.questions[this.state.currentQuestionIndex]
+  const answerQuestion = (answer, timeToAnswerMs) => {
+    if (taskFinished) return
+    const { x: firstNumber, y: secondNumber } = questions[currentQuestionIndex]
     const isCorrect = (firstNumber + secondNumber) === Number(answer)
-    const taskFinished = this.state.currentQuestionIndex === this.state.questions.length - 1
-    let updatedQuestions = this.state.questions
-    updatedQuestions[this.state.currentQuestionIndex].answeredCorrectly = isCorrect
-    updatedQuestions[this.state.currentQuestionIndex].timeToAnswer = timeToAnswerMs
-    updatedQuestions[this.state.currentQuestionIndex].answerGiven = answer
-    this.setState({
-      questions: updatedQuestions,
-      currentQuestionIndex: !taskFinished ? this.state.currentQuestionIndex + 1 : this.state.currentQuestionIndex,
-      taskFinished
-    })
+    const shouldTaskFinish = currentQuestionIndex === questions.length - 1
+
+    let updatedQuestions = [...questions]
+    updatedQuestions[currentQuestionIndex].answeredCorrectly = isCorrect
+    updatedQuestions[currentQuestionIndex].timeToAnswer = timeToAnswerMs
+    updatedQuestions[currentQuestionIndex].answerGiven = answer
+
+    setQuestions(updatedQuestions)
+    setCurrentQuestionIndex(!shouldTaskFinish ? currentQuestionIndex + 1 : currentQuestionIndex)
+    setTaskFinished(shouldTaskFinish)
   }
 
-  render() {
-    if (this.state.shouldRedirectHome) {
-      return (<Redirect to='/' />)
-    }
-    return (
-      <div className="task">
-        <h1>{this.state.taskType}</h1>
-        {this.state.initials ? <p className="initials">Initials: {this.state.initials}</p> : ''}
-        {!this.state.initials && (
-          <Initials setInitials={this.setInitials} />
-        )}
-        {!this.state.taskStarted && this.state.initials && (
-          <button onClick={this.startTask}>Begin {this.state.taskType}</button>
-        )}
-        {this.state.initials && this.state.taskStarted && !this.state.taskFinished && (
-          <>
-            <Problem
-              number1={this.state.questions[this.state.currentQuestionIndex].x}
-              number2={this.state.questions[this.state.currentQuestionIndex].y}
-              answerQuestion={this.answerQuestion}
-            />
-            <hr/>
-            <button onClick={this.finishEarly}>Finish early</button>
-          </>
-        )}
-        {this.state.taskFinished && (
-          <>
-            <Grid questions={this.state.questions} />
-            <div id='keys'>
-              <PhasesKey chosenPhases={this.state.transformedPhases} />
-              <AnswersKey />
-            </div>
-            <button onClick={this.goHome}>Main Menu</button>
-            <button onClick={this.openPrint}>Print</button>
-          </>
-        )}
-      </div>
-    );
+  if (shouldRedirectHome) {
+    return (<Redirect to='/' />)
   }
+  return (
+    <div className="task">
+      {!taskStarted && <BackButton />}
+      <h1>{taskType}</h1>
+      {initials ? <p className="initials">Initials: {initials}</p> : ''}
+      {!initials && (
+        <Initials setInitials={setInitials} />
+      )}
+      {!taskStarted && initials && (
+        <button onClick={() => setTaskStarted(true)}>Begin {taskType}</button>
+      )}
+      {initials && taskStarted && !taskFinished && (
+        <>
+          <Problem
+            number1={questions[currentQuestionIndex].x}
+            number2={questions[currentQuestionIndex].y}
+            answerQuestion={answerQuestion}
+          />
+          <hr/>
+          <button onClick={finishEarly}>Finish early</button>
+        </>
+      )}
+      {taskFinished && (
+        <>
+          <Grid questions={questions} settings={props.settings} />
+          <div id='keys'>
+            <PhasesKey chosenPhases={transformedPhases} />
+            <AnswersKey settings={props.settings} />
+          </div>
+          <hr />
+          <div id='targets'>
+            <Targets answeredQuestions={questions} />
+          </div>
+          <hr />
+          <button onClick={goHome}>Main Menu</button>
+          <button onClick={openPrint}>Print</button>
+        </>
+      )}
+    </div>
+  );
 }
 
 export default Task;

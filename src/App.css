@@ -32,6 +32,7 @@ body {
     border: 10px solid var(--primary-color-light);
     border-radius: 20px;
     margin: 0 20px;
+    position: relative;
 }
 
 input {
@@ -58,6 +59,10 @@ button.selected {
     color: var(--white-color);
 }
 
+hr {
+    border-top: 1px solid var(--primary-color-light);
+}
+
 /* Utilities */
 .bg-primary { background-color: var(--primary-color); }
 .bg-primary-light { background-color: var(--primary-color-light); }
@@ -65,6 +70,14 @@ button.selected {
 .bg-secondary { background-color: var(--secondary-color); }
 .bg-secondary-light { background-color: var(--secondary-color-light); }
 .bg-secondary-dark { background-color: var(--secondary-color-dark); }
+
+/* Common Elements */
+.phaseSquare {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 5px 5px -7px 0;
+}
 
 /** Print Styles **/
 @media print {

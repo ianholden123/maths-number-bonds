@@ -27,7 +27,10 @@ phasesHelper.transformPhases = chosenPhases => {
   if (!chosenPhases || !Array.isArray(chosenPhases))
     throw new Error("Sorry, we couldn't work out which phases you would like to see");
 
-  return chosenPhases.map(chosenPhase => {
+  // Clone our parameter object so that we do not change the object referenced in the parameter.
+  let chosenPhasesClone = JSON.parse(JSON.stringify(chosenPhases))
+
+  return chosenPhasesClone.map(chosenPhase => {
     chosenPhase.bonds.forEach(bond => {
       if (bond.y === bond.x) return
       chosenPhase.bonds.push({ x: bond.y, y: bond.x });
