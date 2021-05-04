@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './Cell.css';
 import presentationHelper from '../../../helpers/presentation'
 
-const Cell = (props) => {
+const Cell = (props: any) => {
     const getClassNames = () => {
         const {x, y, data} = props
         let classNames = ['Cell']
@@ -35,23 +35,24 @@ const Cell = (props) => {
     );
 }
 
-Cell.propTypes = {
-    data: PropTypes.shape({
-        phase: PropTypes.shape({
-            colour: PropTypes.string,
-            answeredCorrectly: PropTypes.bool,
-            answerGiven: PropTypes.string,
-            phase: PropTypes.shape({
-                colour: PropTypes.string,
-                description: PropTypes.string,
-                id: PropTypes.number,
-                name: PropTypes.string,
-                number: PropTypes.number
-            }),
-            timeToAnswer: PropTypes.number
-        })
-    }),
-    handleSelectedCell: PropTypes.func
-}
+// Cell.propTypes = {
+//     data: PropTypes.shape({
+//         phase: PropTypes.shape({
+//             colour: PropTypes.string,
+//             answeredCorrectly: PropTypes.bool,
+//             answerGiven: PropTypes.string,
+//             phase: PropTypes.shape({
+//                 colour: PropTypes.string,
+//                 description: PropTypes.string,
+//                 id: PropTypes.number,
+//                 name: PropTypes.string,
+//                 number: PropTypes.number
+//             }),
+//             timeToAnswer: PropTypes.number
+//         })
+//     }),
+//     handleSelectedCell: PropTypes.func,
+//     children: PropTypes.node
+// }
 
 export default Cell;

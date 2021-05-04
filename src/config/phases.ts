@@ -1,4 +1,4 @@
-const phases = [
+const phases: any[] = [
     {
         id: 0,
         name: 'Phase 1',

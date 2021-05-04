@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import ReactGA from 'react-ga';
 import { Route } from 'react-router-dom';
 
-const GoogleAnalytics = (props) => {
+const GoogleAnalytics = (props: any) => {
   useEffect(() => {
-    const logPageChange = (pathname, search = '') => {
+    const logPageChange = (pathname: any, search = '') => {
       const page = pathname + search;
       const { location } = window;
       ReactGA.set({

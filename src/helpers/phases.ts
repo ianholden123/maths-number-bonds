@@ -1,18 +1,18 @@
 import phases from '../config/phases';
 
-let phasesHelper = {};
+let phasesHelper: any = {};
 
 /**
  * Return a list of phases from the given array of phase IDs.
  * @param chosenPhaseIds An array of IDs.
  * @returns An array of phases.
  */
-phasesHelper.getPhasesFromIds = chosenPhaseIds => {
+phasesHelper.getPhasesFromIds = (chosenPhaseIds: any) => {
   if (!chosenPhaseIds || !Array.isArray(chosenPhaseIds))
     throw new Error("Sorry, we could not work out which phases you would like to use");
 
   return chosenPhaseIds.map(chosenPhaseId => {
-    return phases.find(phase => {
+    return phases.find((phase: any) => {
       return Number(chosenPhaseId) === phase.id;
     });
   });
@@ -23,15 +23,15 @@ phasesHelper.getPhasesFromIds = chosenPhaseIds => {
  * @param chosenPhases An array of phase objects.
  * @return An array of phase objects.
  */
-phasesHelper.transformPhases = chosenPhases => {
+phasesHelper.transformPhases = (chosenPhases: any) => {
   if (!chosenPhases || !Array.isArray(chosenPhases))
     throw new Error("Sorry, we couldn't work out which phases you would like to see");
 
   // Clone our parameter object so that we do not change the object referenced in the parameter.
   let chosenPhasesClone = JSON.parse(JSON.stringify(chosenPhases))
 
-  return chosenPhasesClone.map(chosenPhase => {
-    chosenPhase.bonds.forEach(bond => {
+  return chosenPhasesClone.map((chosenPhase: any) => {
+    chosenPhase.bonds.forEach((bond: any) => {
       if (bond.y === bond.x) return
       chosenPhase.bonds.push({ x: bond.y, y: bond.x });
     });
@@ -44,16 +44,16 @@ phasesHelper.transformPhases = chosenPhases => {
  * @param transformedPhases An array of phases that have been transformed.
  * @returns An array of question objects, enriched with phase information.
  */
-phasesHelper.createQuestionsFromPhases = transformedPhases => {
+phasesHelper.createQuestionsFromPhases = (transformedPhases: any) => {
   if (!transformedPhases || !Array.isArray(transformedPhases))
     throw new Error('Sorry, there was an error retrieving your questions');
   
-  let questions = [];
+  let questions: any = [];
   transformedPhases.forEach(transformedPhase => {
     if (!transformedPhase.bonds || !Array.isArray(transformedPhase.bonds))
       throw new Error('Sorry, we could not find the bonds in this phase');
 
-    transformedPhase.bonds.forEach(bond => {
+    transformedPhase.bonds.forEach((bond: any) => {
       questions.push({
         ...bond,
         answeredCorrectly: null,
@@ -78,7 +78,7 @@ phasesHelper.createQuestionsFromPhases = transformedPhases => {
  * @param array An array.
  * @returns An array with the elements in a different order than the input array. 
  */
-phasesHelper.shuffleArray = array => {
+phasesHelper.shuffleArray = (array: any) => {
   if (!array || !Array.isArray(array))
     throw new Error('Sorry, there was an error shuffling your array');
 

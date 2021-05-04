@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import './BackButton.css'
 import {ReactComponent as BackLogo} from './Back.svg';
 
-const BackButton = (props) => {
+const BackButton = (props: any) => {
   return (
     <Link to={props.to || '/'}>
       <button className='back-btn'>
