@@ -2,7 +2,7 @@ import React from 'react'
 import './Settings.css'
 import BackButton from '../../components/BackButton/BackButton'
 
-const Settings = (props) => {
+const Settings = (props: any) => {
   const { quickAnswerTime } = props.settings
   const { setQuickAnswerTime } = props.settingSetters
 
@@ -18,7 +18,7 @@ const Settings = (props) => {
           defaultValue={quickAnswerTime / 1000}
           min="1"
           max="20"
-          onChange={(e) => setQuickAnswerTime(e.target.value * 1000)}
+          onChange={(e: any) => setQuickAnswerTime(e.target.value * 1000)}
         />
         <span> seconds</span>
       </div>

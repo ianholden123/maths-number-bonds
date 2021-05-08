@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './Initials.css';
 
-const Initials = (props) => {
+const Initials = (props: any) => {
   const [initialsValue, setInitialsValue] = useState('')
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: any) => {
     if (event.key === 'Enter') props.setInitials(initialsValue)
   }
 

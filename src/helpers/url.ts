@@ -1,4 +1,4 @@
-let urlHelper = {};
+let urlHelper: any = {};
 
 /**
  * This function can be used to pull a query parameter from a URL.
@@ -6,9 +6,9 @@ let urlHelper = {};
  * @param urlQueryParamString The query parameter section of a URL.
  * @returns An array of values formed from the values of the query parameter.
  */
-urlHelper.getParamValuesFromUrl = (paramName, urlQueryParamString) => {
+urlHelper.getParamValuesFromUrl = (paramName: any, urlQueryParamString: any) => {
   const regex = new RegExp(`[\\?&]${paramName}=([^&#]*)`);
-  let results = regex.exec(urlQueryParamString);
+  let results: any = regex.exec(urlQueryParamString);
   if (!results) return null
 
   results = decodeURIComponent(results[1].replace(/\+/g, " "));

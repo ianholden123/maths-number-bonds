@@ -3,19 +3,19 @@ import PropTypes from 'prop-types'
 import './Targets.css'
 import answeredQuestionsHelper from '../../../helpers/answeredQuestions'
 
-const Targets = (props) => {
+const Targets = (props: any) => {
   const incorrectAnswers = answeredQuestionsHelper.getAllIncorrectAnswers(props.answeredQuestions)
   const incorrectAnswersByPhase = answeredQuestionsHelper.groupAnswersByPhase(incorrectAnswers)
   const orderedIncorrectAnswersByPhase = answeredQuestionsHelper.sortAnswersByPhase(incorrectAnswersByPhase)
 
-  const getSecureTarget = (orderedIncorrectAnswersByPhase) => {
+  const getSecureTarget = (orderedIncorrectAnswersByPhase: any) => {
     for(const phase of orderedIncorrectAnswersByPhase) {
       if (phase.bonds.length <= 2) return phase
     }
     return null
   }
 
-  const getDevelopmentTarget = (orderedIncorrectAnswersByPhase) => {
+  const getDevelopmentTarget = (orderedIncorrectAnswersByPhase: any) => {
     for(const phase of orderedIncorrectAnswersByPhase) {
       if (phase.bonds.length > 2) return phase
     }

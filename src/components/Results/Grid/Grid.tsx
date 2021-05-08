@@ -5,13 +5,13 @@ import phases from '../../../config/phases'
 import cellGenerator from '../../../helpers/cellGenerator'
 import './Grid.css';
 
-const Grid = (props) => {
+const Grid = (props: any) => {
   const [selectedCellData, setSelectedCellData] = useState(null)
   const [showModal, setShowModal] = useState(false)
 
   const cells = cellGenerator.generateCellsFromPhases(phases, props.questions)
   const emptyCellData = cellGenerator.createCell()
-  const output = []
+  const output: React.ReactNode[] = []
 
   // Create the grid header along the x axis
   for (let n = 0; n < cells.length +1; n++) {
@@ -38,7 +38,7 @@ const Grid = (props) => {
           y={y}
           data={cells[x][y]}
           settings={props.settings}
-          handleSelectedCell={(cellData) => { setSelectedCellData(cellData); setShowModal(true); }}
+          handleSelectedCell={(cellData: any) => { setSelectedCellData(cellData); setShowModal(true); }}
         >
           <span>{`${y} + ${x}`}</span>
         </Cell>

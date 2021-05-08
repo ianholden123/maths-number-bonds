@@ -4,12 +4,12 @@ import './SelectPhases.css';
 import phases from '../../config/phases'
 import BackButton from '../../components/BackButton/BackButton'
 
-const SelectPhases = (props) => {
-  const [selectedPhases, setSelectedPhases] = useState([]);
+const SelectPhases = (props: any) => {
+  const [selectedPhases, setSelectedPhases] = useState<any>([]);
 
   const getPhaseButtons = () => {
-    const buttons = []
-    phases.forEach(phase => {
+    const buttons: any = []
+    phases.forEach((phase) => {
       if ((!phase.id && phase.id < 0) || !phase.name || !phase.description) return;
       buttons.push(
         <button
@@ -25,7 +25,7 @@ const SelectPhases = (props) => {
     return buttons;
   }
 
-  const selectPhase = (id) => {
+  const selectPhase = (id: number) => {
     const selectedIndex = selectedPhases.indexOf(id)
     let newArray = [...selectedPhases]
 

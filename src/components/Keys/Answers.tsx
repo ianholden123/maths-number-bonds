@@ -1,7 +1,7 @@
 import React from 'react'
 import './Answers.css'
 
-const AnswersKey = props => {
+const AnswersKey = (props: any) => {
   const { quickAnswerTime } = props.settings
 
   return (

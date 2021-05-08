@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './Phases.css'
 
-const PhasesKey = ({ chosenPhases }) => (
+const PhasesKey = ({ chosenPhases }: any) => (
   <div id='phasesKey' className='key'>
     Phases:
     <ul>
-      {chosenPhases.map((phase, index) => (
+      {chosenPhases.map((phase: any, index: any) => (
         <li className={`phase${phase.number}`} key={index}>
           <div className='phaseSquare' style={{ backgroundColor: phase.colour, border: `4px solid ${phase.colour}` }} />
           P.{phase.number} { phase.description && `- ${phase.description}` }

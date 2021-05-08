@@ -1,7 +1,7 @@
 import React from "react";
 import "./Modal.css";
 
-const Modal = (props) => {
+const Modal = (props: any) => {
   const { x, y, answerGiven, timeToAnswer, answeredCorrectly} = props.selectedCellData;
   return (
     answerGiven && (

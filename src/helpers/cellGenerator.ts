@@ -1,14 +1,14 @@
-let cellGenerator = {}
+let cellGenerator: any = {}
 
 /**
  * Generates a list of cells based on the phases that are given to it
  * @param phases - A phases object.
  * @param answeredQuestions - An array of every cell and the answers that were or were not given against them.
  */
-cellGenerator.generateCellsFromPhases = (phases, answeredQuestions) => {
+cellGenerator.generateCellsFromPhases = (phases: any, answeredQuestions: any) => {
     if (!phases || !Array.isArray(phases) || phases.length === 0) return null
 
-    let cells = []
+    let cells: any = []
     const yAxisValue = cellGenerator.getAxisRange(phases, 'y')
 
     for (let i = 0; i <= yAxisValue.maxAxisValue; i++) {
@@ -19,7 +19,7 @@ cellGenerator.generateCellsFromPhases = (phases, answeredQuestions) => {
       if (!phase.bonds || typeof phase.bonds !== 'object' || phase.bonds.length === 0) return null
 
       // Here we can populate each phase array with the relevant number bond information
-      phase.bonds.forEach(bond => {
+      phase.bonds.forEach((bond: any) => {
         if (!bond || !bond.hasOwnProperty('x') || !bond.hasOwnProperty('y')) return null
 
         cells[bond.y][bond.x] = cellGenerator.createCell(bond.x, bond.y, phase, answeredQuestions)
@@ -36,7 +36,7 @@ cellGenerator.generateCellsFromPhases = (phases, answeredQuestions) => {
  * @param phases - A phases object.
  * @param axis - A string containing 'x' or 'y'.
  */
-cellGenerator.getAxisRange = (phases, axis) => {
+cellGenerator.getAxisRange = (phases: any, axis: any) => {
   if (!phases || !Array.isArray(phases) || phases.length === 0) return null
   if (axis !== 'x' && axis !== 'y') return null
 
@@ -45,7 +45,7 @@ cellGenerator.getAxisRange = (phases, axis) => {
   phases.forEach((phase) => {
     if (!phase.bonds || typeof phase.bonds !== 'object' || phase.bonds.length === 0) return null
     
-    phase.bonds.forEach(bond => {
+    phase.bonds.forEach((bond: any) => {
       if (!bond || !('x' in bond) || !('y' in bond)) return null
       if (bond[axis] < minAxisValue) minAxisValue = bond[axis]
       if (bond[axis] > maxAxisValue) maxAxisValue = bond[axis]
@@ -61,11 +61,11 @@ cellGenerator.getAxisRange = (phases, axis) => {
  * @param value2 Y value
  * @param phaseObj An object containing data about the phase
  */
-cellGenerator.createCell = (value1 = null, value2 = null, phaseObj = {}, answeredQuestions = null) => {
+cellGenerator.createCell = (value1 = null, value2 = null, phaseObj: any = {}, answeredQuestions: any = null) => {
   let answerGiven, answeredCorrectly, timeToAnswer
   
   if (answeredQuestions) {
-    answeredQuestions.forEach(answeredQuestion => {
+    answeredQuestions.forEach((answeredQuestion: any) => {
       if ((answeredQuestion.x === value1) && (answeredQuestion.y === value2)) {
         answerGiven = answeredQuestion.answerGiven
         answeredCorrectly = answeredQuestion.answeredCorrectly

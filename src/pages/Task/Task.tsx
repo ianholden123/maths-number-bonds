@@ -11,7 +11,7 @@ import Targets from '../../components/Results/Targets/Targets'
 import urlHelper from '../../helpers/url'
 import phasesHelper from '../../helpers/phases'
 
-const Task = (props) => {
+const Task = (props: any) => {
   // Set initials
   const initialsFromUrl = urlHelper.getParamValuesFromUrl('initials', props.location.search)
   const initialsExtracted = (initialsFromUrl && initialsFromUrl[0]) || ''
@@ -36,23 +36,23 @@ const Task = (props) => {
   const [shouldRedirectHome, setShouldRedirectHome] = useState(false)
 
   const goHome = () => {
-    if (!window && !window.confirm) return
+    if (!window.confirm) return
     const result = window.confirm('Are you sure you want to go back? You will lose all results recorded on this page.')
     if (result) setShouldRedirectHome(true)
   }
 
   const finishEarly = () => {
-    if (!window && !window.confirm) return
+    if (!window.confirm) return
     const result = window.confirm('Are you sure you are finished? Confirming will take you to the results page.')
     if (result) setTaskFinished(true)
   }
 
   const openPrint = () => {
-    if (!window && !window.print) return
+    if (!window.print) return
     window.print()
   }
 
-  const answerQuestion = (answer, timeToAnswerMs) => {
+  const answerQuestion = (answer: any, timeToAnswerMs: any) => {
     if (taskFinished) return
     const { x: firstNumber, y: secondNumber } = questions[currentQuestionIndex]
     const isCorrect = (firstNumber + secondNumber) === Number(answer)

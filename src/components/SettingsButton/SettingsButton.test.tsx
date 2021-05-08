@@ -5,12 +5,12 @@ import SettingsButton from './SettingsButton';
 
 describe('<SettingsButton />', () => {
   it('should render a button', () => {
-    const wrapper = shallow(<SettingsButton />)
+    const wrapper: any = shallow(<SettingsButton />)
     expect(wrapper.find('button')).toHaveLength(1)
   })
 
   it('should contain a Link to the Settings page', () => {
-    const wrapper = shallow(<SettingsButton />)
+    const wrapper: any = shallow(<SettingsButton />)
     expect(wrapper.find('Link').prop('to')).toEqual('/settings');
   })
 })

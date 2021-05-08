@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Numpad.css';
 
-const Numpad = (props) => {
+const Numpad = (props: any) => {
   return (
     <div className="numpad">
       <button id="numpad_1" onClick={() => props.handleNumpadButtonPress('1')}>1</button>
