@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import './SelectPhases.css';
-import phases from '../../config/phases'
+import phases, { PhaseType } from '../../config/phases'
 import BackButton from '../../components/BackButton/BackButton'
 
-const SelectPhases = (props: any) => {
-  const [selectedPhases, setSelectedPhases] = useState<any>([]);
+interface SelectPhasesProps {
+  taskType: string
+  title: string
+}
+
+const SelectPhases = (props: SelectPhasesProps) => {
+  const [selectedPhases, setSelectedPhases] = useState<number[]>([]);
 
   const getPhaseButtons = () => {
     const buttons: any = []
-    phases.forEach((phase) => {
+    phases.forEach((phase: PhaseType) => {
       if ((!phase.id && phase.id < 0) || !phase.name || !phase.description) return;
       buttons.push(
         <button

@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 import './Initials.css';
 
-const Initials = (props: any) => {
-  const [initialsValue, setInitialsValue] = useState('')
+interface InitialsProps {
+  setInitials: (initialsValue: string) => void
+}
 
-  const handleKeyDown = (event: any) => {
+const Initials = (props: InitialsProps) => {
+  const [initialsValue, setInitialsValue] = useState<string>('')
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') props.setInitials(initialsValue)
+  }
+
+  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInitialsValue(event.target.value)
   }
 
   return (
@@ -15,7 +23,7 @@ const Initials = (props: any) => {
         type="text"
         name="initials"
         id="initials"
-        onChange={(event) => setInitialsValue(event.target.value)}
+        onChange={handleOnChange}
         onKeyDown={handleKeyDown}
       />
       <button onClick={() => props.setInitials(initialsValue)}>

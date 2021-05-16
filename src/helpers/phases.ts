@@ -1,4 +1,4 @@
-import phases from '../config/phases';
+import phases, { PhaseType } from '../config/phases';
 
 let phasesHelper: any = {};
 
@@ -7,12 +7,12 @@ let phasesHelper: any = {};
  * @param chosenPhaseIds An array of IDs.
  * @returns An array of phases.
  */
-phasesHelper.getPhasesFromIds = (chosenPhaseIds: any) => {
+phasesHelper.getPhasesFromIds = (chosenPhaseIds: string[]) => {
   if (!chosenPhaseIds || !Array.isArray(chosenPhaseIds))
     throw new Error("Sorry, we could not work out which phases you would like to use");
 
   return chosenPhaseIds.map(chosenPhaseId => {
-    return phases.find((phase: any) => {
+    return phases.find((phase: PhaseType) => {
       return Number(chosenPhaseId) === phase.id;
     });
   });
@@ -23,17 +23,17 @@ phasesHelper.getPhasesFromIds = (chosenPhaseIds: any) => {
  * @param chosenPhases An array of phase objects.
  * @return An array of phase objects.
  */
-phasesHelper.transformPhases = (chosenPhases: any) => {
+phasesHelper.transformPhases = (chosenPhases: PhaseType[]) => {
   if (!chosenPhases || !Array.isArray(chosenPhases))
     throw new Error("Sorry, we couldn't work out which phases you would like to see");
 
   // Clone our parameter object so that we do not change the object referenced in the parameter.
   let chosenPhasesClone = JSON.parse(JSON.stringify(chosenPhases))
 
-  return chosenPhasesClone.map((chosenPhase: any) => {
-    chosenPhase.bonds.forEach((bond: any) => {
+  return chosenPhasesClone.map((chosenPhase: PhaseType) => {
+    chosenPhase.bonds!.forEach((bond: any) => {
       if (bond.y === bond.x) return
-      chosenPhase.bonds.push({ x: bond.y, y: bond.x });
+      chosenPhase.bonds!.push({ x: bond.y, y: bond.x });
     });
     return chosenPhase;
   });
@@ -44,7 +44,8 @@ phasesHelper.transformPhases = (chosenPhases: any) => {
  * @param transformedPhases An array of phases that have been transformed.
  * @returns An array of question objects, enriched with phase information.
  */
-phasesHelper.createQuestionsFromPhases = (transformedPhases: any) => {
+phasesHelper.createQuestionsFromPhases = (transformedPhases: PhaseType[]) => {
+  console.log('TRANS', transformedPhases)
   if (!transformedPhases || !Array.isArray(transformedPhases))
     throw new Error('Sorry, there was an error retrieving your questions');
   
@@ -78,7 +79,7 @@ phasesHelper.createQuestionsFromPhases = (transformedPhases: any) => {
  * @param array An array.
  * @returns An array with the elements in a different order than the input array. 
  */
-phasesHelper.shuffleArray = (array: any) => {
+phasesHelper.shuffleArray = (array: any[]) => {
   if (!array || !Array.isArray(array))
     throw new Error('Sorry, there was an error shuffling your array');
 

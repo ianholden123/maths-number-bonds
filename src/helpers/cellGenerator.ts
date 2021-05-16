@@ -1,14 +1,22 @@
+import { PhaseType } from '../config/phases'
+import { AnsweredQuestionsType } from '../helpers/answeredQuestions'
+
 let cellGenerator: any = {}
+
+export interface CellType {
+  x: number
+  y: number
+}
 
 /**
  * Generates a list of cells based on the phases that are given to it
  * @param phases - A phases object.
  * @param answeredQuestions - An array of every cell and the answers that were or were not given against them.
  */
-cellGenerator.generateCellsFromPhases = (phases: any, answeredQuestions: any) => {
+cellGenerator.generateCellsFromPhases = (phases: PhaseType[], answeredQuestions: AnsweredQuestionsType[]) => {
     if (!phases || !Array.isArray(phases) || phases.length === 0) return null
 
-    let cells: any = []
+    let cells: CellType[][] = []
     const yAxisValue = cellGenerator.getAxisRange(phases, 'y')
 
     for (let i = 0; i <= yAxisValue.maxAxisValue; i++) {
@@ -36,7 +44,7 @@ cellGenerator.generateCellsFromPhases = (phases: any, answeredQuestions: any) =>
  * @param phases - A phases object.
  * @param axis - A string containing 'x' or 'y'.
  */
-cellGenerator.getAxisRange = (phases: any, axis: any) => {
+cellGenerator.getAxisRange = (phases: PhaseType[], axis: 'x' | 'y') => {
   if (!phases || !Array.isArray(phases) || phases.length === 0) return null
   if (axis !== 'x' && axis !== 'y') return null
 
@@ -61,11 +69,11 @@ cellGenerator.getAxisRange = (phases: any, axis: any) => {
  * @param value2 Y value
  * @param phaseObj An object containing data about the phase
  */
-cellGenerator.createCell = (value1 = null, value2 = null, phaseObj: any = {}, answeredQuestions: any = null) => {
+cellGenerator.createCell = (value1 = null, value2 = null, phaseObj: any = {}, answeredQuestions: AnsweredQuestionsType[] | null = null) => {
   let answerGiven, answeredCorrectly, timeToAnswer
   
   if (answeredQuestions) {
-    answeredQuestions.forEach((answeredQuestion: any) => {
+    answeredQuestions.forEach((answeredQuestion: AnsweredQuestionsType) => {
       if ((answeredQuestion.x === value1) && (answeredQuestion.y === value2)) {
         answerGiven = answeredQuestion.answerGiven
         answeredCorrectly = answeredQuestion.answeredCorrectly

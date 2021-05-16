@@ -1,9 +1,27 @@
-import React from 'react';
-// import PropTypes from 'prop-types'; 
+import React, { FC } from 'react';
 import './Cell.css';
 import presentationHelper from '../../../helpers/presentation'
+import { ConfigVariableTypes } from '../../../config/variables'
+import { PhaseType } from '../../../config/phases'
 
-const Cell = (props: any) => {
+interface CellData {
+    answeredCorrectly: boolean,
+    phase: {
+        answerGiven: string,
+        colour: string,
+        phase: PhaseType
+    }
+    timeToAnswer: number
+}
+interface CellProps {
+    data: CellData
+    handleSelectedCell?: (a: CellData) => void
+    settings: ConfigVariableTypes
+    x: string
+    y: string
+}
+
+const Cell:FC<CellProps> = (props) => {
     const getClassNames = () => {
         const {x, y, data} = props
         let classNames = ['Cell']
@@ -34,25 +52,5 @@ const Cell = (props: any) => {
         </div>
     );
 }
-
-// Cell.propTypes = {
-//     data: PropTypes.shape({
-//         phase: PropTypes.shape({
-//             colour: PropTypes.string,
-//             answeredCorrectly: PropTypes.bool,
-//             answerGiven: PropTypes.string,
-//             phase: PropTypes.shape({
-//                 colour: PropTypes.string,
-//                 description: PropTypes.string,
-//                 id: PropTypes.number,
-//                 name: PropTypes.string,
-//                 number: PropTypes.number
-//             }),
-//             timeToAnswer: PropTypes.number
-//         })
-//     }),
-//     handleSelectedCell: PropTypes.func,
-//     children: PropTypes.node
-// }
 
 export default Cell;

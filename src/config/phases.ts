@@ -1,4 +1,16 @@
-const phases: any[] = [
+export interface PhaseType {
+    id: number
+    name: string
+    description: string
+    number: number
+    colour: string
+    bonds?: {
+        x: number
+        y: number
+    }[]
+}
+
+const phases: PhaseType[] = [
     {
         id: 0,
         name: 'Phase 1',
