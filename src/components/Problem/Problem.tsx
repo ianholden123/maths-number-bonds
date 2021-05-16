@@ -2,16 +2,22 @@ import React, { useState } from 'react';
 import './Problem.css';
 import Numpad from '../Numpad/Numpad'
 
-const Problem = (props: any) => {
-  const [currentAnswer, setCurrentAnswer] = useState('')
-  const [problemStartDateTime, setProblemStartDateTime] = useState(new Date())
+interface ProblemProps {
+  answerQuestion: (answer: string, timeDifference: number) => void
+  number1: number
+  number2: number
+}
+
+const Problem = (props: ProblemProps) => {
+  const [currentAnswer, setCurrentAnswer] = useState<string>('')
+  const [problemStartDateTime, setProblemStartDateTime] = useState<Date>(new Date())
 
   const resetState = () => {
     setCurrentAnswer('')
     setProblemStartDateTime(new Date())
   }
 
-  const handleNumpadButtonPress = (value: any) => {
+  const handleNumpadButtonPress = (value: string) => {
     switch(value) {
       case '0':
       case '1':
@@ -36,7 +42,7 @@ const Problem = (props: any) => {
     }
   }
 
-  const submitAnswer = (answer: any) => {
+  const submitAnswer = (answer: string) => {
     if (!answer) return
     const problemEndDateTime = new Date()
     const timeDifference = problemEndDateTime.getTime() - problemStartDateTime.getTime()

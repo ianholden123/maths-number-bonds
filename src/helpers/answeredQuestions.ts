@@ -1,11 +1,22 @@
+import { PhaseType } from '../config/phases'
+
 let answeredQuestions: any = {}
+
+export interface AnsweredQuestionsType {
+  answerGiven: string
+  answeredCorrectly: boolean
+  phase: PhaseType
+  timeToAnswer: number
+  x: number
+  y: number
+}
 
 /**
  * Filter all questions that have been answered incorrectly from a list of
  * questions and answers.
  * @param {Array} answeredQuestions An array of question objects
  */
-answeredQuestions.getAllIncorrectAnswers = (answeredQuestions: any) => {
+answeredQuestions.getAllIncorrectAnswers = (answeredQuestions: AnsweredQuestionsType[]) => {
   if (!answeredQuestions || !Array.isArray(answeredQuestions))
     throw new Error('We could not retrieve incorrect answers from questions given.')
 
@@ -18,7 +29,7 @@ answeredQuestions.getAllIncorrectAnswers = (answeredQuestions: any) => {
  * Group all answers by their corresponding phase.
  * @param {Array} answeredQuestions An array of question objects
  */
-answeredQuestions.groupAnswersByPhase = (answeredQuestions: any) => {
+answeredQuestions.groupAnswersByPhase = (answeredQuestions: AnsweredQuestionsType[]) => {
   if (!answeredQuestions || !Array.isArray(answeredQuestions))
     throw new Error('We could not retrieve incorrect answers from questions given.')
 

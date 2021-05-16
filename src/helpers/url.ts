@@ -6,10 +6,10 @@ let urlHelper: any = {};
  * @param urlQueryParamString The query parameter section of a URL.
  * @returns An array of values formed from the values of the query parameter.
  */
-urlHelper.getParamValuesFromUrl = (paramName: any, urlQueryParamString: any) => {
+urlHelper.getParamValuesFromUrl = (paramName: string, urlQueryParam: string): string[] => {
   const regex = new RegExp(`[\\?&]${paramName}=([^&#]*)`);
-  let results: any = regex.exec(urlQueryParamString);
-  if (!results) return null
+  let results: RegExpExecArray | string | null  = regex.exec(urlQueryParam);
+  if (!results) return []
 
   results = decodeURIComponent(results[1].replace(/\+/g, " "));
   return results.toString().split(",");

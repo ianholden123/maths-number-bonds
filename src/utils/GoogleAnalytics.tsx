@@ -1,9 +1,14 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import * as H from 'history'
 import ReactGA from 'react-ga';
 import { Route } from 'react-router-dom';
 
-const GoogleAnalytics = (props: any) => {
+interface GoogleAnalyticsProps {
+  location: H.Location
+  options: any
+}
+
+const GoogleAnalytics = (props: GoogleAnalyticsProps) => {
   useEffect(() => {
     const logPageChange = (pathname: any, search = '') => {
       const page = pathname + search;
@@ -22,16 +27,9 @@ const GoogleAnalytics = (props: any) => {
   return null;
 }
 
-GoogleAnalytics.propTypes = {
-  location: PropTypes.shape({
-      pathname: PropTypes.string,
-      search: PropTypes.string
-  }).isRequired
-};
-
 const RouteTracker = () => <Route component={GoogleAnalytics} />;
 
-const init = () => {
+const init = (): boolean => {
   const isProduction = process.env.NODE_ENV === 'production';
   if (isProduction) ReactGA.initialize("UA-176723134-1");
   return isProduction;

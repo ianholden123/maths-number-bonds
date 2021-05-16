@@ -8,13 +8,13 @@ import Settings from './pages/Settings/Settings'
 import { quickAnswerTime } from './config/variables'
 import GA from './utils/GoogleAnalytics'
 
-const App = (props: any) => {
+const App = () => {
   const [settings, setSettings] = useState({
-    quickAnswerTime: localStorage.getItem('quickAnswerTime') || quickAnswerTime
+    quickAnswerTime: Number(localStorage.getItem('quickAnswerTime')) || quickAnswerTime
   })
 
-  const setQuickAnswerTime = (value: any) => {
-    localStorage.setItem('quickAnswerTime', value);
+  const setQuickAnswerTime = (value: number) => {
+    localStorage.setItem('quickAnswerTime', String(value));
     setSettings({ quickAnswerTime: value })
   }
 

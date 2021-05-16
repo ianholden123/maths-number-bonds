@@ -1,9 +1,20 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import './Targets.css'
 import answeredQuestionsHelper from '../../../helpers/answeredQuestions'
+import { PhaseType } from '../../../config/phases'
 
-const Targets = (props: any) => {
+interface TargetsProps {
+  answeredQuestions: {
+    x: number,
+    y: number,
+    answeredCorrectly: boolean,
+    answerGiven: string,
+    timeToAnswer: number,
+    phase: PhaseType
+  }[]
+}
+
+const Targets = (props: TargetsProps) => {
   const incorrectAnswers = answeredQuestionsHelper.getAllIncorrectAnswers(props.answeredQuestions)
   const incorrectAnswersByPhase = answeredQuestionsHelper.groupAnswersByPhase(incorrectAnswers)
   const orderedIncorrectAnswersByPhase = answeredQuestionsHelper.sortAnswersByPhase(incorrectAnswersByPhase)
@@ -40,25 +51,6 @@ const Targets = (props: any) => {
         </div>
       )}
     </>
-  )
-}
-
-Targets.propTypes = {
-  answeredQuestions: PropTypes.arrayOf(
-    PropTypes.shape({
-      x: PropTypes.number,
-      y: PropTypes.number,
-      answeredCorrectly: PropTypes.bool,
-      answerGiven: PropTypes.string,
-      timeToAnswer: PropTypes.number,
-      phase: PropTypes.shape({
-        id: PropTypes.number,
-        name: PropTypes.string,
-        description: PropTypes.string,
-        number: PropTypes.number,
-        colour: PropTypes.string
-      })
-    })
   )
 }
 

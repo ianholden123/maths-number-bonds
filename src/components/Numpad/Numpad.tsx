@@ -1,8 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './Numpad.css';
 
-const Numpad = (props: any) => {
+interface NumpadProps {
+  handleNumpadButtonPress: (a: string) => void,
+  currentAnswer: string
+}
+
+const Numpad = (props: NumpadProps) => {
   return (
     <div className="numpad">
       <button id="numpad_1" onClick={() => props.handleNumpadButtonPress('1')}>1</button>
@@ -25,11 +29,6 @@ const Numpad = (props: any) => {
       >Enter</button>
     </div>
   );
-}
-
-Numpad.propTypes = {
-  handleNumpadButtonPress: PropTypes.func.isRequired,
-  currentAnswer: PropTypes.string
 }
 
 export default Numpad;

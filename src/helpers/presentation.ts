@@ -6,7 +6,7 @@ let presentationHelper: any = {}
  * @param bgColor The background colour that you would like to know the most suitable overlaying text colour for.
  * @returns A string - either 'light-color' or 'dark-color'.
  */
-presentationHelper.pickTextColorBasedOnBgColor = (bgColor: any) => {
+presentationHelper.pickTextColorBasedOnBgColor = (bgColor: string): string => {
   if (!bgColor || typeof bgColor !== 'string' || bgColor.charAt(0) !== '#') {
     console.warn(`Unable to pick a text colour based on the given background colour: '${bgColor}'. Please provide a new colour in the correct HEX format (e.g. '#0000FF' instead of 'blue').`)
     return 'dark-color'

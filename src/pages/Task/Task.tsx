@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from "react-router-dom";
+import * as H from "history";
 import './Task.css';
 import Initials from '../../components/Initials/Initials'
 import Problem from '../../components/Problem/Problem'
@@ -10,8 +11,14 @@ import BackButton from '../../components/BackButton/BackButton'
 import Targets from '../../components/Results/Targets/Targets'
 import urlHelper from '../../helpers/url'
 import phasesHelper from '../../helpers/phases'
+import { ConfigVariableTypes } from '../../config/variables'
 
-const Task = (props: any) => {
+export interface TaskProps {
+  location: H.Location
+  settings: ConfigVariableTypes
+}
+
+const Task = (props: TaskProps) => {
   // Set initials
   const initialsFromUrl = urlHelper.getParamValuesFromUrl('initials', props.location.search)
   const initialsExtracted = (initialsFromUrl && initialsFromUrl[0]) || ''

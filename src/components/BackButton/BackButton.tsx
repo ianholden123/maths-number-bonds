@@ -1,10 +1,13 @@
 import React from 'react'
-import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import './BackButton.css'
 import {ReactComponent as BackLogo} from './Back.svg';
 
-const BackButton = (props: any) => {
+interface BackButtonProps {
+  to?: string
+}
+
+const BackButton = (props: BackButtonProps) => {
   return (
     <Link to={props.to || '/'}>
       <button className='back-btn'>
@@ -12,10 +15,6 @@ const BackButton = (props: any) => {
       </button>
     </Link>
   )
-}
-
-BackButton.propTypes = {
-  to: PropTypes.string
 }
 
 export default BackButton;
